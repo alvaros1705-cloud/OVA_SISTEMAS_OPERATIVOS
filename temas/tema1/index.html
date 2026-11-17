@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tema de ejemplo 1</title>
+  <script>
+    (function () {
+      function aplicar(tema) {
+        if (tema === "dark") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        } else {
+          document.documentElement.removeAttribute("data-theme");
+        }
+      }
+      try { aplicar(localStorage.getItem("ovaTema")); } catch (e) {}
+      window.addEventListener("message", function (e) {
+        if (e.data && e.data.tipo === "ovaTema") aplicar(e.data.tema);
+      });
+    })();
+  </script>
+  <style>
+    :root {
+      --azul: #1f6feb;
+      --fondo: #f6f7f3;
+      --superficie: #ffffff;
+      --borde: #e3e8df;
+      --texto: #14211a;
+      --suave: #5c6b60;
+      --banner: linear-gradient(135deg, #1f6feb, #00c2a8);
+    }
+    [data-theme="dark"] {
+      --azul: #3fb6d8;
+      --fondo: #061826;
+      --superficie: #0c2436;
+      --borde: #17384c;
+      --texto: #e7f2f8;
+      --suave: #8aa9bd;
+      --banner: linear-gradient(135deg, #0e7c86, #3fb6d8);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html {
+      background: var(--fondo);
+      transition: background-color 180ms ease;
+    }
+    [data-theme="dark"] { color-scheme: dark; }
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--fondo);
+      color: var(--texto);
+      line-height: 1.65;
+      min-height: 100vh;
+      padding: 32px 20px 56px;
+      transition: background-color 180ms ease, color 180ms ease;
+    }
+    .contenido { max-width: 860px; margin-inline: auto; }
+    .banner {
+      background: var(--banner);
+      color: #fff;
+      border-radius: 18px;
+      padding: 40px 32px;
+      margin-bottom: 28px;
+    }
+    .banner h1 { font-size: clamp(1.5rem, 4vw, 2.2rem); line-height: 1.2; }
+    .banner p { opacity: 0.9; margin-top: 8px; }
+    .bloque {
+      background: var(--superficie);
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      padding: 26px;
+      margin-bottom: 20px;
+      transition: background-color 180ms ease, border-color 180ms ease;
+    }
+    .bloque h2 { font-size: 1.2rem; margin-bottom: 10px; color: var(--azul); }
+    .bloque p { color: var(--suave); }
+    .bloque ul { margin: 10px 0 0 20px; color: var(--suave); }
+    .bloque li { margin-bottom: 6px; }
+    footer { text-align: center; color: var(--suave); font-size: 0.85rem; margin-top: 28px; }
+  </style>
+</head>
+<body>
+  <div class="contenido">
+    <header class="banner">
+      <h1>Tema de ejemplo 1</h1>
+      <p>OVA de Nombre del autor</p>
+    </header>
+
+    <!--
+      APARTADO LISTO PARA EL OVA DEL COMPAÑERO.
+      Reemplaza el contenido de las secciones .bloque (o pega aquí el OVA)
+      sin modificar el encabezado ni los estilos del contenedor.
+    -->
+    <main id="ova">
+      <section class="bloque">
+        <h2>Introducción</h2>
+        <p>Este es un contenido de ejemplo. Reemplaza este texto con la información del OVA del compañero.</p>
+      </section>
+
+      <section class="bloque">
+        <h2>Objetivos</h2>
+        <ul>
+          <li>Objetivo de aprendizaje uno.</li>
+          <li>Objetivo de aprendizaje dos.</li>
+          <li>Objetivo de aprendizaje tres.</li>
+        </ul>
+      </section>
+
+      <section class="bloque">
+        <h2>Contenido del tema</h2>
+        <p>Aquí va el desarrollo del tema, imágenes, videos, actividades o cualquier recurso del OVA.</p>
+      </section>
+    </main>
+
+    <footer>OVA elaborado como parte del proyecto grupal</footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OVA · CORE — Memoria virtual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar__inner">
+      <a class="marca" href="#" id="marca">
+        <span class="marca__icono">
+          <span class="marca__icono-inner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="7" y="7" width="10" height="10" rx="2"/>
+              <rect x="10" y="10" width="4" height="4" rx="1"/>
+              <path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4"/>
+            </svg>
+          </span>
+        </span>
+        <span class="marca__texto">
+          <strong>OVA <span class="marca__punto">•</span> CORE</strong>
+          <small data-i18n="brandSubtitle">kernel_learning // universidad simón bolívar</small>
+        </span>
+      </a>
+
+      <div class="navbar__acciones">
+        <div class="idioma" role="group" aria-label="Selector de idioma">
+          <button class="idioma__opcion activo" type="button" data-lang="es" aria-pressed="true">ES</button>
+          <button class="idioma__opcion" type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+
+        <div class="progreso-global">
+          <span class="progreso-global__etiqueta" data-i18n="globalProgress">PROGRESO GLOBAL</span>
+          <div class="progreso-global__fila">
+            <div class="barra barra--mini">
+              <span id="barraGlobal"></span>
+            </div>
+            <span class="progreso-global__pct" id="pctGlobal">0%</span>
+            <span class="badge-estado" id="badgeGlobal" data-i18n="inProgress">EN CURSO</span>
+            <button class="boton-circular" type="button" id="accionGlobal" aria-label="Ir a las preguntas">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard">
+
+    <aside class="sidebar">
+      <div class="panel ruta">
+        <div class="ruta__cabecera">
+          <span class="etiqueta-mono" data-i18n="learningPath">RUTA DE APRENDIZAJE</span>
+          <span class="ruta__contador">01 / 03</span>
+        </div>
+
+        <nav class="ruta__lista" id="rutaLista" aria-label="Ruta de aprendizaje"></nav>
+      </div>
+
+      <div class="terminal">
+        <div class="terminal__barra">
+          <span class="terminal__punto"></span>
+          <span class="terminal__nombre">stdout</span>
+        </div>
+        <p class="terminal__linea">$ kernel_init --module=memoria_virtual<span class="terminal__cursor"></span></p>
+      </div>
+    </aside>
+
+    <section class="panel contenido">
+      <span class="badge-paso" data-i18n="badgeStep">PASO 1 • REQUISITO INICIAL OBLIGATORIO</span>
+
+      <h1 class="contenido__titulo" data-i18n="title">Memoria virtual</h1>
+
+      <p class="contenido__desc" id="descripcion"></p>
+
+      <div class="caja-progreso">
+        <div class="caja-progreso__fila">
+          <span class="etiqueta-mono dim" data-i18n="moduleProgress">PROGRESO DEL MÓDULO</span>
+          <span class="contador" id="contadorRespondidas">Respondidas: 0 de 9</span>
+        </div>
+        <div class="barra">
+          <span id="barraModulo"></span>
+        </div>
+      </div>
+
+      <hr class="divisor">
+
+      <div class="preguntas" id="preguntas"></div>
+
+    </section>
+
+  </main>
+
+  <footer class="pie">
+    <span>kernel_ova</span>
+    <span class="pie__punto"></span>
+    <span>OVA grupal &middot; <span id="anio"></span></span>
+  </footer>
+
+  <section class="lector" id="lector" hidden role="dialog" aria-modal="true" aria-label="Lector de OVA">
+    <div class="lector__caja">
+      <div class="lector__barra">
+        <div class="lector__info">
+          <span class="etiqueta-mono dim" data-i18n="readerLabel">OVA :: LECTURA</span>
+          <h2 id="lectorTitulo"></h2>
+        </div>
+        <button class="boton-cerrar" type="button" id="lectorCerrar">
+          <span data-i18n="closeLabel">Cerrar</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <iframe id="lectorFrame" class="lector__frame" title="Objeto Virtual de Aprendizaje" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
