@@ -1,0 +1,22 @@
+PLATAFORMA DE EVALUACIÓN - UNIVERSIDAD SIMÓN BOLÍVAR
+
+1. Descomprime el ZIP.
+2. Abre la carpeta y ejecuta index.html con Chrome, Edge o Firefox.
+3. Registra nombre y semestre.
+4. Los temas se desbloquean en orden al completar el juego anterior.
+5. En cada tema se muestra el espacio de contenido HTML, el PDF descargable y el juego.
+
+IMPORTANTE:
+- La nota automática es exclusivamente la del juego (0.0 a 5.0).
+- Cada taller PDF tiene cinco preguntas y se entrega por Aula Extendida. El profesor lo califica allí; esa nota no se captura ni se calcula en esta plataforma.
+- Los resultados se guardan en localStorage del navegador y dispositivo. No se sincronizan entre equipos ni se centralizan para el docente.
+- Los espacios de contenido HTML están preparados para integrar los archivos de los integrantes cuando los entreguen.
+- Los cuatro talleres incluidos son borradores funcionales basados en los títulos de los temas; deben revisarse con el material oficial de clase antes de su uso definitivo.
+- Esta versión es un prototipo frontend; para un registro docente centralizado se necesita backend y base de datos.
+
+
+OVA integrado:
+- El OVA del Tema 4 está guardado en ovas/tema-4/.
+- Desde el Tema 4, el botón "Abrir OVA del Tema 4" abre su página principal.
+- Se conservaron sus archivos HTML, CSS, JavaScript y logo. Se excluyeron únicamente archivos internos de Git y configuración local de VS Code.
+- La plataforma incorpora un modo oscuro opcional inspirado en la paleta del OVA (azul marino, cian y verde). El diseño claro sigue siendo el predeterminado.

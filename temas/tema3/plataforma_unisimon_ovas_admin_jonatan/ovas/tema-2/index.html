@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrada / Salida en un sistema operativo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="sim-page">
+  <nav class="site-header" aria-label="Navegación principal">
+    <div class="topbar-inner">
+      <a class="site-brand" href="#top" aria-label="Ir al inicio de Entrada y Salida">
+        <img class="university-logo" src="Logo USB con el nombre completo.png" alt="Universidad Simón Bolívar">
+        <span class="brand-divider" aria-hidden="true"></span>
+        <img class="career-logo" src="logosist-removebg-preview.png" alt="">
+      </a>
+      <div class="top-nav">
+        <a class="active" href="#intro">Introducción</a>
+        <a href="#hardware">Hardware</a>
+        <a href="#software">Software</a>
+        <a href="#simulador">Simulador</a>
+        <a href="#video">Video</a>
+        <a href="#glosario">Glosario</a>
+        <a href="#referencias">Referencias</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar a modo claro" aria-pressed="false">
+          <span id="theme-icon" aria-hidden="true">☀</span>
+          <span id="theme-label">Claro</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div class="eyebrow">Universidad Simón Bolívar · Sistemas operativos · Capítulo 5</div>
+      <h1>Entrada / Salida (E/S) en un sistema operativo</h1>
+      <p class="lead">Cómo el sistema operativo controla los dispositivos de la computadora, desde el hardware hasta los programas del usuario.</p>
+    </div>
+  </header>
+
+  <main class="index-wrap">
+    <section id="intro">
+      <h2>1. Introducción</h2>
+      <p>Una de las funciones principales del sistema operativo es el <em>control de todos los dispositivos de E/S</em> (teclado, disco, impresora, red, entre otros). Para lograrlo debe:</p>
+      <ul>
+        <li>Enviar comandos a los dispositivos.</li>
+        <li>Detectar las interrupciones.</li>
+        <li>Controlar los errores.</li>
+        <li>Ofrecer una interfaz sencilla y, de preferencia, igual para todos los dispositivos (<em>independencia del dispositivo</em>).</li>
+      </ul>
+      <p>El código de E/S es una parte importante del sistema operativo, y usar mal los dispositivos puede causar ineficiencias que reducen el rendimiento de todo el sistema.</p>
+      <div class="box">
+        <strong>Idea clave:</strong>
+        <p>El sistema operativo actúa como intermediario entre el hardware y los programas, ocultando las diferencias entre dispositivos y ofreciendo una interfaz uniforme.</p>
+      </div>
+    </section>
+
+    <section id="hardware">
+      <h2>2. Principios del hardware de E/S</h2>
+      <p>La interfaz del hardware indica qué comandos acepta, qué funciones realiza y qué errores puede informar.</p>
+
+      <h3>Dispositivos de bloque y de carácter</h3>
+      <div class="grid">
+        <div class="box">
+          <strong>De bloque</strong>
+          <p>Guardan información en bloques de tamaño fijo. Cada bloque tiene una dirección y se puede leer o escribir de forma independiente. Ejemplo: los discos.</p>
+        </div>
+        <div class="box">
+          <strong>De carácter</strong>
+          <p>Transfieren un flujo de caracteres, sin bloques ni direcciones. Ejemplos: impresoras de línea, terminales, interfaces de red y ratones.</p>
+        </div>
+      </div>
+      <p>Hay excepciones: los relojes no tienen bloques con dirección ni generan flujos de caracteres. El sistema de archivos trabaja con dispositivos de bloque abstractos; los detalles del dispositivo quedan a cargo del software manejador.</p>
+
+      <h3>Controladores de dispositivos</h3>
+      <p>Una unidad de E/S tiene un componente mecánico y uno electrónico, llamado controlador o adaptador. El sistema operativo se comunica con el controlador, no directamente con el dispositivo.</p>
+      <p>El controlador intercambia bits con el dispositivo, organiza los datos, comprueba errores y los copia a memoria. Sus registros reciben comandos y parámetros del sistema operativo. Cuando termina una operación, el controlador provoca una interrupción.</p>
+
+      <h3>Acceso directo a memoria (DMA)</h3>
+      <p><strong>Sin DMA:</strong> el controlador lee el bloque en su buffer y provoca una interrupción; después la CPU copia el bloque a memoria byte por byte, ocupando tiempo de procesamiento.</p>
+      <p><strong>Con DMA:</strong> la CPU indica la dirección del bloque, la dirección de memoria destino y cuántos bytes transferir. El controlador hace la copia y provoca una sola interrupción al terminar.</p>
+      <p>El buffer interno permite almacenar los datos mientras se transfieren, incluso si el bus está ocupado.</p>
+
+      <h3>Factor de separación</h3>
+      <p>En algunos discos, mientras un controlador simple transfiere un sector a memoria, el siguiente sector puede pasar bajo la cabeza y perderse. Para evitarlo, al formatear se numeran los bloques dejando uno o más espacios entre ellos; así el sistema puede leerlos en orden a la máxima velocidad posible.</p>
+    </section>
+
+    <section id="software">
+      <h2>3. Principios del software de E/S</h2>
+
+      <h3>Organización en capas</h3>
+      <p>Las capas inferiores ocultan las peculiaridades del hardware y las superiores ofrecen una interfaz más sencilla:</p>
+      <div class="layers">
+        <div class="item"><strong>Proceso del usuario:</strong> realiza llamadas de E/S, da formato a los datos y puede usar spooling.</div>
+        <div class="item"><strong>Software independiente del dispositivo:</strong> gestiona nombres, protección, buffers y asignación.</div>
+        <div class="item"><strong>Manejadores de dispositivos:</strong> escriben en los registros del controlador y verifican su estado.</div>
+        <div class="item"><strong>Manejadores de interrupciones:</strong> atienden la interrupción y desbloquean el proceso que esperaba.</div>
+        <div class="item"><strong>Hardware:</strong> realiza la operación física de E/S.</div>
+      </div>
+
+      <h3>Objetivos del software de E/S</h3>
+      <ul>
+        <li><strong>Independencia del dispositivo:</strong> un programa puede funcionar con archivos en distintos dispositivos sin modificarse.</li>
+        <li><strong>Nombres uniformes:</strong> archivos y dispositivos se direccionan mediante nombres y rutas.</li>
+        <li><strong>Manejo de errores:</strong> se resuelven lo más cerca posible del hardware y se notifican a niveles superiores si es necesario.</li>
+        <li><strong>Transferencias síncronas o asíncronas:</strong> la E/S suele ser asíncrona, aunque el sistema operativo puede presentarla de forma sencilla y síncrona a los programas.</li>
+        <li><strong>Dispositivos compartidos o exclusivos:</strong> los discos suelen compartirse; una impresora puede requerir acceso exclusivo.</li>
+      </ul>
+
+      <h3>Manejadores de interrupciones</h3>
+      <p>El proceso que inicia una operación de E/S puede bloquearse hasta que esta termina. Cuando llega la interrupción, el manejador correspondiente atiende el evento y desbloquea el proceso.</p>
+
+      <h3>Manejadores de dispositivos</h3>
+      <p>Este software depende del dispositivo. Recibe solicitudes abstractas, las convierte en operaciones concretas, escribe comandos en el controlador, espera la interrupción, revisa errores y atiende la siguiente solicitud de la cola.</p>
+
+      <h3>Software independiente del dispositivo</h3>
+      <p>Proporciona una interfaz uniforme a los manejadores y se ocupa de nombres, protección, buffers, bloques de tamaño uniforme, asignación e informes de errores. En muchos sistemas, cada dispositivo se identifica con un nodo-i que incluye un número principal (el manejador) y uno secundario (la unidad).</p>
+
+      <h3>Software de usuario y spooling</h3>
+      <p>Una parte pequeña del software de E/S está en bibliotecas enlazadas a los programas; la mayor parte pertenece al sistema operativo. El <strong>spooling</strong> se usa con dispositivos de acceso exclusivo: los procesos dejan sus archivos en un directorio de spooling y un proceso especial, llamado demonio, los envía al dispositivo. Así, un proceso no retiene la impresora mientras prepara todo el trabajo.</p>
+    </section>
+
+    <section id="simulador">
+      <h2>4. Simulador: leer un bloque de disco</h2>
+      <p>Compara cómo se lee un bloque con y sin DMA. Observa el buffer del controlador, la memoria principal y cuánto tiempo de CPU se ocupa. La barra representa el uso de CPU, no la velocidad total de lectura.</p>
+
+      <div class="sim">
+        <div class="ctl">
+          <label>Modo
+            <select id="mode">
+              <option value="nodma">Sin DMA</option>
+              <option value="dma">Con DMA</option>
+            </select>
+          </label>
+          <label>Bytes del bloque
+            <select id="n">
+              <option>4</option>
+              <option selected>8</option>
+              <option>12</option>
+              <option>16</option>
+            </select>
+          </label>
+          <button id="step" class="main">Paso</button>
+          <button id="run">Ejecutar</button>
+          <button id="reset">Reiniciar</button>
+        </div>
+        <div class="row"><b>Buffer del controlador</b><div class="cells" id="buf"></div></div>
+        <div class="row"><b>Memoria principal (destino)</b><div class="cells" id="mem"></div></div>
+        <div class="row regs" id="regs"></div>
+        <div class="row"><b>CPU ocupada: <span id="cpuTxt">0</span> ciclos</b><div class="bar"><i id="cpuBar"></i></div></div>
+        <div id="msg" aria-live="polite">Pulsa «Paso» o «Ejecutar» para comenzar.</div>
+        <div id="res"></div>
+      </div>
+    </section>
+
+    <section id="video">
+      <h2>5. Video complementario: gestión de entrada y salida</h2>
+      <p>Recurso audiovisual sobre gestión de E/S, DMA, buffers y RAID.</p>
+      <div class="video-frame" id="video-player">
+        <a class="video-fallback" href="https://www.youtube.com/watch?v=U8V8TTavEXs" target="_blank" rel="noopener noreferrer">
+          <img src="https://i.ytimg.com/vi/U8V8TTavEXs/hqdefault.jpg" alt="" loading="lazy">
+          <span class="video-fallback-content">
+            <span class="video-play-icon" aria-hidden="true">▶</span>
+            <strong>Reproducir video en YouTube</strong>
+            <span class="video-fallback-note">Al abrir esta página como archivo local, el reproductor incrustado no está disponible. Pulsa aquí para ver el video.</span>
+          </span>
+        </a>
+      </div>
+      <p class="video-source">Si no puedes reproducirlo aquí, míralo en <a href="https://www.youtube.com/watch?v=U8V8TTavEXs" target="_blank" rel="noopener noreferrer">YouTube</a>.</p>
+    </section>
+
+    <section id="glosario">
+      <h2>6. Glosario</h2>
+      <dl class="glossary">
+        <div>
+          <dt>Buffer</dt>
+          <dd>Área temporal de memoria donde se guardan datos mientras se transfieren entre un dispositivo y la computadora.</dd>
+        </div>
+        <div>
+          <dt>Controlador de dispositivo</dt>
+          <dd>Componente electrónico que recibe comandos del sistema operativo y controla la comunicación con un dispositivo.</dd>
+        </div>
+        <div>
+          <dt>DMA (acceso directo a memoria)</dt>
+          <dd>Mecanismo que permite transferir datos entre un dispositivo y la memoria sin que la CPU copie cada byte.</dd>
+        </div>
+        <div>
+          <dt>Dispositivo de bloque</dt>
+          <dd>Dispositivo que organiza la información en bloques direccionables, como un disco.</dd>
+        </div>
+        <div>
+          <dt>Dispositivo de carácter</dt>
+          <dd>Dispositivo que entrega o recibe un flujo de caracteres, sin direccionar bloques individuales.</dd>
+        </div>
+        <div>
+          <dt>Factor de separación</dt>
+          <dd>Espaciado entre sectores consecutivos para dar tiempo al sistema a procesar un sector antes de que llegue el siguiente.</dd>
+        </div>
+        <div>
+          <dt>Interrupción</dt>
+          <dd>Señal que notifica a la CPU que un dispositivo requiere atención o que una operación terminó.</dd>
+        </div>
+        <div>
+          <dt>Manejador de dispositivo</dt>
+          <dd>Software específico que traduce solicitudes del sistema operativo en comandos para un dispositivo.</dd>
+        </div>
+        <div>
+          <dt>Spooling</dt>
+          <dd>Colocación de trabajos en una cola o almacenamiento temporal para que un proceso los envíe después a un dispositivo de uso exclusivo.</dd>
+        </div>
+        <div>
+          <dt>Transferencia asíncrona</dt>
+          <dd>Operación de E/S que puede continuar mientras la CPU realiza otras tareas y que avisa cuando finaliza.</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section id="referencias">
+      <h2>7. Referencias bibliográficas</h2>
+      <ol class="references">
+        <li>La Red Martínez, Luis. <cite>Sistemas Operativos</cite>.</li>
+        <li>Tanenbaum, Andrew S., y Herbert Bos. <cite>Modern Operating Systems</cite>. 4.ª ed., Pearson, 2015.</li>
+        <li>Silberschatz, Abraham, Peter B. Galvin y Greg Gagne. <cite>Operating System Concepts</cite>. 10.ª ed., Wiley, 2018.</li>
+        <li>Bottarlini, G. (s. f.). <cite>Unidad 9 – Gestión de Entrada y Salida | DMA, Buffers y RAID explicados fácil</cite> [Video]. YouTube. <a href="https://www.youtube.com/watch?v=U8V8TTavEXs" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=U8V8TTavEXs</a></li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer class="project-footer">
+    <div class="footer-inner">
+      <img class="footer-logo" src="logosist-removebg-preview.png" alt="Logo de Ingeniería de Sistemas">
+      <div class="footer-copy">
+        <p class="footer-eyebrow">Universidad Simón Bolívar</p>
+        <h2>Facultad de Ingeniería</h2>
+        <p class="footer-program">Ingeniería de Sistemas</p>
+        <p>Asignatura de Sistemas Operativos</p>
+        <p>Docente: Ingeniero Álvaro Salamanca Landínez</p>
+        <p class="footer-developer">Desarrollado por <strong>Tomás Mateo Monsalve Caballero</strong></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    var $ = function(id){ return document.getElementById(id); };
+    var steps = [], idx = 0, timer = null;
+
+    function setTheme(theme) {
+      var isLight = theme === 'light';
+      document.documentElement.setAttribute('data-theme', isLight ? 'light' : 'dark');
+      $('theme-toggle').setAttribute('aria-pressed', isLight ? 'true' : 'false');
+      $('theme-toggle').setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+      $('theme-icon').textContent = isLight ? '☾' : '☀';
+      $('theme-label').textContent = isLight ? 'Oscuro' : 'Claro';
+    }
+
+    $('theme-toggle').onclick = function() {
+      setTheme(document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light');
+    };
+
+    if (window.location.protocol !== 'file:') {
+      var video = document.createElement('iframe');
+      video.src = 'https://www.youtube-nocookie.com/embed/U8V8TTavEXs?rel=0';
+      video.title = 'Unidad 9 – Gestión de Entrada y Salida | DMA, Buffers y RAID explicados fácil';
+      video.loading = 'lazy';
+      video.referrerPolicy = 'strict-origin-when-cross-origin';
+      video.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      video.allowFullscreen = true;
+      $('video-player').innerHTML = '';
+      $('video-player').appendChild(video);
+    }
+
+    function build() {
+      stop();
+      var n = Number($('n').value), dma = $('mode').value === 'dma';
+      steps = [];
+      var s = { buf: 0, mem: 0, cnt: n, addr: 0, cpu: 0, msg: 'Estado inicial. La CPU aún no ha pedido nada.' };
+      function push(o){ s = Object.assign({}, s, o); steps.push(s); }
+      steps.push(s);
+
+      if (dma) {
+        push({ cpu: s.cpu + 1, msg: 'La CPU escribe en el controlador la dirección del bloque en disco (1 ciclo).' });
+        push({ cpu: s.cpu + 1, msg: 'La CPU escribe la dirección de memoria destino (1 ciclo más).' });
+        push({ cpu: s.cpu + 1, msg: 'La CPU escribe el número de bytes por transferir (' + n + '). Con esto queda libre para otro trabajo.' });
+        for (var i = 1; i <= n; i++) push({ buf: i, msg: 'El controlador lee el bloque a su buffer interno (' + i + '/' + n + '). La CPU está libre.' });
+        push({ msg: 'El controlador comprueba la suma de verificación y confirma que no hubo errores de lectura.' });
+        for (var j = 1; j <= n; j++) push({ mem: j, addr: j, cnt: n - j, msg: 'DMA copia el byte ' + j + ' a memoria, incrementa la dirección y decrementa el contador. La CPU sigue libre.' });
+        push({ cpu: s.cpu + 1, msg: 'El contador llegó a 0: el controlador provoca una interrupción. El bloque ya está en memoria.' });
+      } else {
+        push({ cpu: s.cpu + 1, msg: 'La CPU envía el comando de lectura al controlador.' });
+        for (var i = 1; i <= n; i++) push({ buf: i, msg: 'El controlador lee el bloque a su buffer interno (' + i + '/' + n + ').' });
+        push({ msg: 'El controlador comprueba la suma de verificación y confirma que no hubo errores.' });
+        push({ cpu: s.cpu + 1, msg: 'El controlador provoca una interrupción. El sistema operativo toma el control de la CPU.' });
+        for (var j = 1; j <= n; j++) push({ mem: j, cpu: s.cpu + 1, msg: 'La CPU lee el byte ' + j + ' del registro del controlador y lo guarda en memoria.' });
+      }
+
+      idx = 0;
+      draw();
+    }
+
+    function cells(el, k, n) {
+      el.innerHTML = '';
+      for (var i = 0; i < n; i++) {
+        var d = document.createElement('div');
+        d.className = 'c' + (i < k ? ' on' : '');
+        d.textContent = i < k ? 'B' + (i + 1) : '';
+        el.appendChild(d);
+      }
+    }
+
+    function draw() {
+      var n = Number($('n').value), s = steps[idx], totalCpu = steps[steps.length - 1].cpu;
+      cells($('buf'), s.buf, n);
+      cells($('mem'), s.mem, n);
+      var dma = $('mode').value === 'dma';
+      $('regs').innerHTML = dma
+        ? '<span>Dirección DMA: ' + s.addr + '</span><span>Contador DMA: ' + s.cnt + '</span>'
+        : '<span>Modo programado: la CPU copia cada byte</span>';
+      $('cpuTxt').textContent = s.cpu;
+      $('cpuBar').style.width = Math.min(100, (s.cpu / (n + 2)) * 100) + '%';
+      $('msg').textContent = s.msg;
+      var done = idx === steps.length - 1;
+      $('res').textContent = done
+        ? 'Terminado. Tiempo de CPU usado: ' + totalCpu + ' ciclos' + (dma ? ' (no crece con el tamaño del bloque).' : ' (crece con cada byte copiado).')
+        : 'Paso ' + idx + ' de ' + (steps.length - 1);
+    }
+
+    function next() {
+      if (idx < steps.length - 1) {
+        idx += 1;
+        draw();
+        return true;
+      }
+      stop();
+      return false;
+    }
+
+    function stop() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+        $('run').textContent = 'Ejecutar';
+      }
+    }
+
+    $('step').onclick = function(){ stop(); next(); };
+    $('run').onclick = function(){
+      if (timer) { stop(); return; }
+      if (idx >= steps.length - 1) idx = 0;
+      $('run').textContent = 'Pausar';
+      timer = setInterval(next, 500);
+    };
+    $('reset').onclick = build;
+    $('mode').onchange = build;
+    $('n').onchange = build;
+    build();
+  </script>
+</body>
+</html>

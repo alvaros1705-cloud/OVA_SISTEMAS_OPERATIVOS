@@ -1,0 +1,54 @@
+PLATAFORMA OVA - UNIVERSIDAD SIMÓN BOLÍVAR
+Versión integrada para revisión y continuación del proyecto
+
+INICIO
+1. Descomprimir el ZIP completo.
+2. Abrir la carpeta raíz y ejecutar index.html en Chrome, Edge o Firefox.
+3. Registrar nombre completo y semestre para ingresar como estudiante.
+4. Los temas se habilitan en orden cuando se descarga el taller PDF y se termina el juego del tema anterior.
+5. En cada tema se encuentra el botón para abrir su OVA en una pestaña nueva.
+
+OVA INTEGRADOS
+- Tema 1: Memoria virtual -> ovas/tema-1/index.html
+- Tema 2: Entrada / Salida (E/S) -> ovas/tema-2/index.html
+- Tema 3: Seguridad en sistemas operativos -> ovas/tema-3/index.html
+- Tema 4: Tiempo real, sistemas embebidos y tolerancia a fallos -> ovas/tema-4/index.html
+
+ADMINISTRADOR (PROTOTIPO LOCAL)
+- En la pantalla inicial, seleccionar "Acceso administrador".
+- Usuario: docente
+- Contraseña: Unisimon2026!
+- El panel muestra el nombre/semestre, nota de cada juego, si se descargó el taller y el estado de cada tema.
+- Las notas mostradas son las calificaciones automáticas del juego. Los talleres PDF se entregan y califican por Aula Extendida; no forman parte de la nota automática.
+
+LIMITACIÓN IMPORTANTE DEL PANEL DOCENTE
+Esta versión es un prototipo frontend: los datos se guardan en localStorage del navegador y del dispositivo. El administrador solo verá los registros creados en ese mismo navegador/perfil. No existe sincronización entre computadores ni una base de datos central. Para que el profesor vea desde su computador las notas de todos los estudiantes, incluso desde sus casas o laboratorios, hace falta desplegar un backend y una base de datos compartida (por ejemplo PostgreSQL) y conectar el inicio de sesión a ese servicio. Las credenciales de este prototipo no deben utilizarse como seguridad real en producción.
+
+NOTAS PARA JONATAN - CÓMO ESTÁ ORGANIZADO
+- index.html: estructura de pantallas (ingreso estudiante, inicio, tema, resultados y panel docente).
+- styles.css: estilos visuales, modo claro/oscuro y estilos del panel docente.
+- app.js: lógica de navegación, juegos, notas, desbloqueo, traducción, tema visual y panel docente.
+- talleres/: los cuatro talleres PDF descargables.
+- ovas/tema-1/ a ovas/tema-4/: cada OVA completo y separado por tema.
+
+CAMBIOS SEGUROS
+- Para cambiar textos de los botones o títulos, revisar index.html y las traducciones en app.js.
+- Para cambiar colores o tamaños, revisar styles.css. No eliminar las clases dark-theme.
+- Para cambiar preguntas, palabras o pistas del ahorcado, editar TOPICS al inicio de app.js y mantener dos palabras por tema si se conserva el criterio actual.
+- Para cambiar la ubicación de un OVA, actualizar la ruta ovaPaths en renderTopicContent() dentro de app.js.
+- Para cambiar la contraseña de prueba, editar ADMIN_USER y ADMIN_PASS en app.js. Recuerda: al estar en frontend, no es una autenticación segura.
+- Mantener los nombres de carpetas y archivos tal como están para no romper las rutas relativas de CSS, JS, imágenes o páginas internas.
+
+REGLAS ACADÉMICAS
+- Solo los juegos generan nota automática (0.0 a 5.0).
+- Los talleres son PDF descargables y se califican externamente en Aula Extendida.
+- El OVA es material de aprendizaje; sus evaluaciones internas pertenecen al propio OVA y no se sincronizan con la nota de juego de esta plataforma salvo desarrollo adicional.
+
+PRUEBAS RECOMENDADAS ANTES DE ENTREGA
+1. Ingresar como estudiante y abrir cada uno de los cuatro temas.
+2. Abrir los cuatro OVA y comprobar navegación interna.
+3. Descargar cada taller PDF.
+4. Terminar el juego y comprobar nota y desbloqueo del siguiente tema.
+5. Cambiar español/inglés y modo claro/oscuro.
+6. Abrir el panel docente en el mismo navegador y comprobar que aparecen los registros locales.
+7. Repetir con otro navegador/perfil para comprobar la limitación de almacenamiento local.

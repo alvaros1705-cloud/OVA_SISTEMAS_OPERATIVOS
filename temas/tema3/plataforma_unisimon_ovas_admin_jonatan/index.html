@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plataforma de Evaluación | Universidad Simón Bolívar</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top"><div class="top-inner"><div class="brand"><span class="brandmark">US</span><div><b>Universidad Simón Bolívar</b><small>Ingeniería de Sistemas · Plataforma académica</small></div></div><div class="header-actions">
+<button id="themeBtn" class="ghost" type="button" aria-pressed="false">Tema oscuro</button>
+<button id="translateBtn" class="ghost translate-btn" type="button">Traducir</button>
+</div></div></header>
+<main class="wrap">
+<section id="login" class="panel login">
+<p class="eyebrow">ÁREA DE APRENDIZAJE</p><h1>Bienvenido</h1><p class="muted">Ingresa tus datos para comenzar.</p>
+<form id="loginForm"><label>Nombre completo</label><input id="studentName" required maxlength="100" placeholder="Tu nombre completo"><label>Semestre que cursas</label><select id="semester" required><option value="">Selecciona</option><option>1.º semestre</option><option>2.º semestre</option><option>3.º semestre</option><option>4.º semestre</option><option>5.º semestre</option><option>6.º semestre</option><option>7.º semestre</option><option>8.º semestre</option><option>9.º semestre</option><option>10.º semestre</option></select><button class="primary">Ingresar</button></form><button id="adminAccess" class="ghost admin-access" type="button">Acceso administrador</button>
+</section>
+<section id="home" class="hidden">
+<div class="heading"><div><p class="eyebrow">RECORRIDO ACADÉMICO</p><h1>Selecciona un tema</h1><p id="greeting" class="muted"></p></div><button id="logout" class="ghost">Cerrar sesión</button></div>
+<div class="progress"><b>Progreso de juegos</b><span id="progressText">0 de 4 completados</span><div class="track"><div id="progressBar"></div></div><small>Completa el juego de cada tema para desbloquear el siguiente.</small></div>
+<div id="topicGrid" class="grid"></div>
+</section>
+<section id="topic" class="hidden">
+<button id="back" class="ghost">← Volver a temas</button><div class="topic-head"><p class="eyebrow" id="topicNumber"></p><h1 id="topicTitle"></h1></div>
+<div class="panel content"><h2>Contenido del tema</h2><div id="topicContent" class="topic-content"></div></div>
+<div class="actions"><a id="pdfLink" class="button secondary" download>↓ Descargar taller PDF</a><button id="startGame" class="primary">Iniciar juego</button></div>
+<div id="gameArea" class="panel hidden"><div class="game-top"><div><p class="eyebrow">EVALUACIÓN DEL JUEGO</p><h2 id="gameTitle"></h2></div><span class="score-chip">Nota: <b id="liveScore">—</b></span></div><div id="quiz"></div><button id="submitGame" class="primary">Finalizar y calcular nota</button><div id="gameResult" class="result hidden"></div></div>
+</section>
+<section id="results" class="panel hidden"><p class="eyebrow">RESULTADOS</p><h1>Mis calificaciones</h1><div id="gradeRows"></div><button id="returnHome" class="primary">Volver a los temas</button></section>
+<section id="admin" class="panel hidden">
+<p class="eyebrow">PANEL DOCENTE</p><h1>Calificaciones de estudiantes</h1>
+<p class="muted">Registros disponibles en este navegador y dispositivo.</p>
+<div class="admin-actions"><button id="adminRefresh" class="secondary">Actualizar registros</button><button id="adminBack" class="ghost">Volver al inicio</button></div>
+<div class="table-wrap"><table><thead><tr><th>Estudiante / semestre</th><th>Tema</th><th>Nota del juego</th><th>Taller descargado</th><th>Estado</th></tr></thead><tbody id="adminRows"></tbody></table></div>
+<p class="admin-note">Nota: el panel muestra las notas automáticas de los juegos. No registra ni califica los talleres PDF, que se entregan por Aula Extendida.</p>
+</section>
+</main><footer>Universidad Simón Bolívar · Plataforma académica de actividades</footer><script src="app.js"></script>
+</body></html>
