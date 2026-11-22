@@ -55,3 +55,10 @@ Estas comprobaciones no sustituyen una prueba manual de navegación, interacció
 - Los cuatro PDF de talleres se conservaron; su calidad y correspondencia académica requieren revisión docente.
 - La traducción general del portal y del OVA CORE está incluida; las traducciones internas de los módulos estudiantiles dependen de sus propios controles y contenidos disponibles.
 - El sitio aún requiere activar/verificar GitHub Pages y ejecutar la primera publicación.
+
+## Correcciones posteriores a la primera publicación (v0.3)
+
+- Se corrigió la navegación entre cortes: al seleccionar una unidad, el aula vuelve al inicio del contenido y ya no desplaza al primer cuestionario. Seleccionar nuevamente el corte activo tampoco abre automáticamente el primer recurso.
+- La plataforma de evaluación del tercer corte ahora abre en modo Invitado / Acceso libre y muestra directamente su recorrido de temas. El formulario de nombre y semestre dejó de ser un requisito de entrada.
+- Los OVA de los estudiantes, sus talleres y sus recursos se conservan. Los simuladores nuevos se integrarán cuando sean entregados, manteniendo la posibilidad de preservar su diseño original.
+- Validaciones efectuadas: sintaxis JavaScript correcta en los archivos modificados y comprobaciones estructurales positivas de ambos comportamientos. La comprobación visual manual en navegador queda pendiente.
