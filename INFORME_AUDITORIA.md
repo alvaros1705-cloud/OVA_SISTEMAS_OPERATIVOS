@@ -62,3 +62,12 @@ Estas comprobaciones no sustituyen una prueba manual de navegación, interacció
 - La plataforma de evaluación del tercer corte ahora abre en modo Invitado / Acceso libre y muestra directamente su recorrido de temas. El formulario de nombre y semestre dejó de ser un requisito de entrada.
 - Los OVA de los estudiantes, sus talleres y sus recursos se conservan. Los simuladores nuevos se integrarán cuando sean entregados, manteniendo la posibilidad de preservar su diseño original.
 - Validaciones efectuadas: sintaxis JavaScript correcta en los archivos modificados y comprobaciones estructurales positivas de ambos comportamientos. La comprobación visual manual en navegador queda pendiente.
+
+
+## Corrección reforzada v0.4 (22/11/2026)
+
+- La navegación entre cortes desplaza el contenedor al encabezado del dashboard mediante `scrollIntoView`, además de reiniciar el scroll del documento. Esto cubre el caso en que OVA CORE está dentro del visor integrado.
+- La plataforma de evaluación declara `meta[name="ova-access-mode"][content="guest"]`. La rutina `prepararFrame()` del aula anfitriona reconoce la marca y omite el autollenado/envío del formulario antiguo, que exigía seleccionar semestre.
+- La plataforma mantiene su sesión `Invitado / Acceso libre` y oculta explícitamente el formulario de registro al iniciar.
+- Se añadieron identificadores `v=0.4` en las rutas y recursos afectados para evitar que el navegador reutilice JavaScript antiguo.
+- Requiere recarga completa de pestañas abiertas previamente (Ctrl+F5) para sustituir los recursos almacenados en caché.
