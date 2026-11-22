@@ -125,7 +125,6 @@ def build_manifest(files: list[Path]) -> None:
         href = quote(relative, safe="/-._~")
         ET.SubElement(resource, qname(IMS_NS, "file"), {"href": href})
 
-    ET.SubElement(resource, qname(IMS_NS, "dependency"), {"identifierref": "RES-SISTEMAS-OPERATIVOS"})
     tree = ET.ElementTree(manifest)
     ET.indent(tree, space="  ")
     tree.write(PACKAGE_DIR / "imsmanifest.xml", encoding="utf-8", xml_declaration=True)
