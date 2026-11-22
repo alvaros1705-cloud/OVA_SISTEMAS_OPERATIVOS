@@ -257,4 +257,26 @@
   }
 
   initHeroMotion();
+
+  function initHeroTitleMotion() {
+    const title = document.querySelector('#heroTitle');
+    if (!title) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const syncTitleMotion = () => {
+      const enabled = !reduceMotion.matches && !document.hidden;
+      title.classList.toggle('hero-title-motion', enabled);
+      title.classList.toggle('hero-title-static', !enabled);
+    };
+
+    syncTitleMotion();
+    document.addEventListener('visibilitychange', syncTitleMotion);
+    if (typeof reduceMotion.addEventListener === 'function') {
+      reduceMotion.addEventListener('change', syncTitleMotion);
+    } else if (typeof reduceMotion.addListener === 'function') {
+      reduceMotion.addListener(syncTitleMotion);
+    }
+  }
+
+  initHeroTitleMotion();
 })();
