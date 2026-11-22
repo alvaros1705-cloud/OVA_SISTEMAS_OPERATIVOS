@@ -10,7 +10,7 @@
     es: {
       title: 'Sistemas Operativos | OVA · Universidad Simón Bolívar',
       skip: 'Saltar al contenido', navAria: 'Navegación principal', socialAria: 'Redes institucionales',
-      nav: ['Inicio','Introducción','Objetivos','Plan semanal','Unidades','Simuladores'],
+      nav: ['Inicio','Introducción','Objetivos','Plan semanal','Unidades','Laboratorio'],
       themeDark: 'Modo oscuro', themeLight: 'Modo claro', themeDarkAria: 'Cambiar a modo oscuro', themeLightAria: 'Cambiar a modo claro',
       eyebrow: 'INGENIERÍA DE SISTEMAS · VI SEMESTRE', heroTitle: 'Sistemas<br><em>Operativos</em>',
       heroLead: 'Explora cómo el sistema operativo administra los recursos del computador, coordina la ejecución de programas y proporciona los servicios esenciales para construir soluciones tecnológicas seguras y eficientes.',
@@ -48,12 +48,12 @@
       planNote:'Nota: la distribución semanal reproduce la secuencia del PAC. La clasificación visual por unidades sigue los tres bloques de integración definidos para este OVA.',
       methodKicker:'05 · METODOLOGÍA DE APRENDIZAJE', methodTitle:'De los conceptos a la experimentación.', methodText:'El curso combina diagnóstico de saberes previos, búsqueda y consulta de información, exposiciones como trabajo independiente y talleres prácticos de simulación de proyectos.',
       methodSteps:['Explora y consulta','Comprende los conceptos','Practica en laboratorios','Argumenta y evalúa'],
-      simKicker:'06 · EXPERIMENTACIÓN', simTitle:'Laboratorio de simuladores', simIntro:'Un espacio central para reunir los simuladores y laboratorios interactivos desarrollados por los estudiantes.',
-      simOver:'ESPACIO DE INTEGRACIÓN', simFeatureTitle:'Experimenta con los sistemas operativos', simFeatureText:'Los simuladores adicionales se incorporarán cuando se reciban sus versiones completas. Se respetará el diseño, los controles y la experiencia de cada laboratorio, integrándolos desde este punto de acceso.', simStatus:'Sección preparada para integración',
+      simKicker:'06 · EXPERIMENTACIÓN', simTitle:'Laboratorio de simuladores', simIntro:'Un espacio centralizado para experimentar con los simuladores de Sistemas Operativos, respetando la interfaz y la experiencia original de cada proyecto.',
+      simOver:'ESPACIO DE EXPERIMENTACIÓN', simFeatureTitle:'Explora. Configura. Experimenta.', simFeatureText:'Encuentra los simuladores organizados alfabéticamente por su nombre. Cada laboratorio conserva su propio diseño, controles y recursos; el OVA solo proporciona un punto de acceso común.', simStatus:'Laboratorio disponible',
       simCards:[
-        ['Laboratorios incluidos en las unidades','Algunos recursos interactivos ya están integrados en los OVA de los cortes.','Abrir unidad 2'],
-        ['Simulador de sistemas de archivos','El OVA de sistemas de archivos contiene un simulador de asignación de bloques, inodos y desfragmentación.','Abrir simulador'],
-        ['Simuladores del examen final','Acceso centralizado pendiente de recibir los archivos finales de los estudiantes.','Pendiente de recepción']
+        ['Acceso centralizado','Simuladores de procesos, concurrencia, memoria, discos y entrada/salida.','Ver simuladores'],
+        ['Diseños originales','Los simuladores se abren con su interfaz y controles originales, sin rediseñar sus pantallas.','Abrir Laboratorio'],
+        ['Recursos en preparación','Los proyectos que requieren compilación o archivos ejecutables adicionales se identifican antes de habilitar su acceso.','Consultar estado']
       ],
       closingOver:'SISTEMAS OPERATIVOS · INGENIERÍA DE SISTEMAS', closingTitle:'Conoce el sistema. Comprende sus procesos. Experimenta.', closingText:'Inicia el recorrido por las unidades de aprendizaje y utiliza los recursos interactivos para reforzar los conceptos.', closingButton:'Ingresar al aula',
       footerOver:'OBJETO VIRTUAL DE APRENDIZAJE', footerText:'Programa de Ingeniería de Sistemas · Universidad Simón Bolívar.', footerNav:'NAVEGACIÓN', footerResources:'RECURSOS', footerDevelopers:'DESARROLLADORES', footerNavLinks:['Inicio','Introducción','Objetivos','Plan semanal','Unidades de aprendizaje','Laboratorio de simuladores'], footerResourceLinks:['Unidad 1 · Fundamentos','Unidad 2 · Procesos y memoria','Unidad 3 · Servicios avanzados','Simulador de archivos'], footerUnits:['Unidad 1 · Fundamentos','Unidad 2 · Procesos y memoria','Unidad 3 · Memoria y servicios'], footerBottom:'Universidad Simón Bolívar · Ingeniería de Sistemas', footerCourse:'OVA de Sistemas Operativos'
@@ -61,7 +61,7 @@
     en: {
       title: 'Operating Systems | VLO · Simón Bolívar University',
       skip: 'Skip to content', navAria: 'Main navigation', socialAria: 'University social networks',
-      nav: ['Home','Introduction','Objectives','Weekly plan','Units','Simulators'],
+      nav: ['Home','Introduction','Objectives','Weekly plan','Units','Laboratory'],
       themeDark: 'Dark mode', themeLight: 'Light mode', themeDarkAria: 'Switch to dark mode', themeLightAria: 'Switch to light mode',
       eyebrow: 'SYSTEMS ENGINEERING · SIXTH SEMESTER', heroTitle: 'Operating<br><em>Systems</em>',
       heroLead: 'Explore how the operating system manages computer resources, coordinates program execution, and provides the essential services needed to build secure and efficient technological solutions.',
@@ -99,12 +99,12 @@
       planNote:'Note: the weekly sequence reproduces the PAC. The visual classification by unit follows the three integration blocks defined for this VLO.',
       methodKicker:'05 · LEARNING METHODOLOGY', methodTitle:'From concepts to experimentation.', methodText:'The course combines a prior-knowledge diagnostic, information search and consultation, student presentations as independent work, and practical project-simulation workshops.',
       methodSteps:['Explore and research','Understand the concepts','Practice in laboratories','Discuss and evaluate'],
-      simKicker:'06 · EXPERIMENTATION', simTitle:'Simulator laboratory', simIntro:'A central space to bring together the simulators and interactive laboratories developed by students.',
-      simOver:'INTEGRATION SPACE', simFeatureTitle:'Experiment with operating systems', simFeatureText:'Additional simulators will be included when their complete versions are received. Each laboratory’s original design, controls, and experience will be preserved and accessed from this hub.', simStatus:'Section ready for integration',
+      simKicker:'06 · EXPERIMENTATION', simTitle:'Simulator laboratory', simIntro:'A centralized space to experiment with Operating Systems simulators while preserving each project’s original interface and experience.',
+      simOver:'INTEGRATION SPACE', simFeatureTitle:'Explore. Configure. Experiment.', simFeatureText:'Find simulators arranged alphabetically by name. Each laboratory keeps its own design, controls, and resources; the VLO simply provides a common access point.', simStatus:'Laboratory available',
       simCards:[
-        ['Laboratories included in the units','Some interactive resources are already integrated into the unit VLOs.','Open unit 2'],
-        ['File-system simulator','The file-systems VLO includes a simulator for block allocation, inodes, and defragmentation.','Open simulator'],
-        ['Final-exam simulators','Centralized access will be added when the students’ final files are received.','Awaiting files']
+        ['Centralized access','Simulators for processes, concurrency, memory, disks, and input/output.','View simulators'],
+        ['Original designs','Simulators open with their original interfaces and controls; their screens are not redesigned.','Open Laboratory'],
+        ['Resources in preparation','Projects requiring a build or additional executable files are identified before access is enabled.','Check status']
       ],
       closingOver:'OPERATING SYSTEMS · SYSTEMS ENGINEERING', closingTitle:'Know the system. Understand its processes. Experiment.', closingText:'Begin your journey through the learning units and use the interactive resources to reinforce the concepts.', closingButton:'Enter classroom',
       footerOver:'VIRTUAL LEARNING OBJECT', footerText:'Systems Engineering Program · Simón Bolívar University.', footerNav:'NAVIGATION', footerResources:'RESOURCES', footerDevelopers:'DEVELOPERS', footerNavLinks:['Home','Introduction','Objectives','Weekly plan','Learning units','Simulator laboratory'], footerResourceLinks:['Unit 1 · Foundations','Unit 2 · Processes and memory','Unit 3 · Advanced services','File-system simulator'], footerUnits:['Unit 1 · Foundations','Unit 2 · Processes and memory','Unit 3 · Memory and services'], footerBottom:'Simón Bolívar University · Systems Engineering', footerCourse:'Operating Systems VLO'
