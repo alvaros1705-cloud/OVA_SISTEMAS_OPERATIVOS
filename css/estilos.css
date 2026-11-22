@@ -2028,3 +2028,77 @@ html[data-theme="light"] .social-quick-links a:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .social-quick-links a { transition: none; }
 }
+
+
+/* v0.8 — corrección de contraste prioritaria para la unidad seleccionada. */
+html[data-theme="light"] .ruta .ruta__lista > .modulo.modulo--activo,
+html[data-theme="light"] .ruta .ruta__lista > .modulo.modulo--activo:hover,
+html[data-theme="light"] .ruta .ruta__lista > .modulo.modulo--activo:focus,
+html[data-theme="light"] .ruta .ruta__lista > .modulo.modulo--activo:focus-visible {
+  background: linear-gradient(112deg, #087d38 0%, #1b9b52 100%) !important;
+  background-color: #087d38 !important;
+  border-color: #087d38 !important;
+  color: #ffffff !important;
+  opacity: 1 !important;
+  filter: none !important;
+  -webkit-text-fill-color: #ffffff !important;
+  box-shadow: 0 9px 24px rgba(9, 132, 59, .22) !important;
+}
+
+html[data-theme="light"] .ruta .ruta__lista > .modulo.modulo--activo .modulo__texto,
+html[data-theme="light"] .ruta .ruta__lista > .modulo.modulo--activo .modulo__texto strong,
+html[data-theme="light"] .ruta .ruta__lista > .modulo.modulo--activo .modulo__texto small,
+html[data-theme="light"] .ruta .ruta__lista > .modulo.modulo--activo .modulo__icono {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+html[data-theme="light"] .ruta .ruta__lista > .modulo.modulo--activo .modulo__icono {
+  background: rgba(255,255,255,.16) !important;
+  border-color: rgba(255,255,255,.42) !important;
+}
+
+html[data-theme="light"] .ruta .ruta__lista > .modulo.modulo--activo .modulo__paso {
+  color: #08783a !important;
+  background: #ffffff !important;
+  -webkit-text-fill-color: #08783a !important;
+}
+
+.social-quick-links a {
+  cursor: pointer;
+  pointer-events: auto;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 760px) {
+  .social-quick-links {
+    display: inline-flex !important;
+    position: fixed;
+    left: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    z-index: 150;
+    gap: 7px;
+    padding: 7px;
+    border: 1px solid #cfe1d4;
+    border-radius: 999px;
+    background: rgba(255,255,255,.94);
+    box-shadow: 0 10px 28px rgba(17, 54, 30, .17);
+    backdrop-filter: blur(12px);
+  }
+
+  .social-quick-links a {
+    width: 36px;
+    height: 36px;
+    color: #205336;
+    background: #f4faf5;
+    border-color: #cfe1d4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-quick-links a {
+    transition: none !important;
+  }
+}
