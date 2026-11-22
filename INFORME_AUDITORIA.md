@@ -106,3 +106,15 @@ Estas comprobaciones no sustituyen una prueba manual de navegación, interacció
 - Redes institucionales: se conectaron los iconos de Facebook e Instagram en la cabecera del portal y del aula a las cuentas oficiales proporcionadas por el docente. Los enlaces abren en una pestaña nueva con protección `noopener noreferrer`.
 - Caché de estilos: portal `portal.css?v=0.6`; aula `css/estilos.css?v=0.7`.
 - No se modificaron los textos académicos, los bancos de preguntas ni el flujo de evaluación. Se conservan las hojas de estilo y scripts propios de cada OVA temática.
+
+
+## Corrección de interacción y caché v0.8 (22/11/2026)
+
+- Aula, ruta de aprendizaje: se reforzó con alta especificidad el estado de la unidad activa en modo claro. El fondo verde y los textos blancos quedan fijados también en hover, foco y foco visible; se fuerza opacidad completa y se elimina cualquier filtro que reduzca el contraste.
+- Aula, tooltips: se retiró el atributo `title` de las tarjetas de unidad porque el tooltip nativo del navegador se superponía sobre el nombre. Se conservan las etiquetas accesibles `aria-label`.
+- Redes sociales del portal: los enlaces de Facebook e Instagram se colocaron dentro de la navegación responsive. Se corrigió el traductor para que solo actualice anclas internas con `href^="#"`; antes trataba los iconos sociales como entradas de navegación y podía reemplazar sus SVG por texto vacío.
+- Aula: se revisaron los enlaces sociales, se mantuvieron como anclas normales con navegación directa y se preparó su acceso visible en pantallas móviles.
+- Portada: el movimiento visual se activa mediante JavaScript con la clase `motion-active`, se pausa al ocultar la pestaña y respeta `prefers-reduced-motion`. Incluye movimiento suave del chip y parallax con puntero en escritorio.
+- Versiones de recursos para evitar caché: portal `portal.css?v=0.8` y `portal.js?v=0.7`; aula `css/estilos.css?v=0.8` y `js/app.js?v=0.6`.
+- Validación estática posterior a los cambios: sintaxis JavaScript del portal y del aula comprobada; balance de llaves en ambas hojas CSS comprobado; enlaces y atributos de versiones cotejados en los HTML; selector de traducción limitado a enlaces internos.
+- Limitación de validación: el navegador automatizado no pudo iniciar por saldo agotado del servicio externo; el navegador web de esta sesión tampoco pudo abrir GitHub Pages ni las redes sociales. Por lo tanto, no se declara una prueba visual/click end-to-end de producción como completada.
