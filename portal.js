@@ -209,7 +209,6 @@
   }
   setTheme(theme,false);
   applyLanguage(language,false);
-}
 
   // La animación del procesador se activa desde JavaScript y sus movimientos
   // se definen en portal.css. Se pausa cuando la pestaña no está visible o
