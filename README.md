@@ -27,17 +27,21 @@ Portal del Objeto Virtual de Aprendizaje del curso Sistemas Operativos (código 
 - Propósito, objetivos, competencia e información académica del PAC.
 - Plan de actividades de 16 semanas conforme al apartado 14 del PAC.
 - Pie de página con desarrolladores agrupados por bloque.
-- Laboratorio central preparado para añadir los simuladores del examen final.
+- Módulo Laboratorio con acceso centralizado a 11 simuladores disponibles (9 paquetes locales y 2 sitios publicados externos), ordenados alfabéticamente por el nombre de cada simulador.
+- Los simuladores locales se cargan como documentos originales en un visor aislado; no se rediseñan sus pantallas ni se sustituyen sus controles.
+- Botón Laboratorio disponible desde el portal principal y desde la navegación del aula.
 
 ## Preferencias y datos
 
 Las preferencias de apariencia e idioma se guardan localmente mediante `localStorage` (`ovaTema` y `ovaIdioma`). El progreso del estudiante también se almacena localmente en el OVA CORE; no equivale a una plataforma institucional de calificaciones ni sincroniza avances entre diferentes equipos.
 
-Los OVA de los estudiantes mantienen sus interfaces internas y controles originales. Los cambios de idioma/apariencia del portal no reemplazan automáticamente los mecanismos propios de cada módulo.
+Los OVA de los estudiantes mantienen sus interfaces internas y controles originales. Los cambios de idioma/apariencia del portal no reemplazan automáticamente los mecanismos propios de cada módulo. Los simuladores de Laboratorio conservan sus documentos, hojas de estilo y scripts originales; se usa un visor común únicamente para facilitar su acceso.
 
 ## Pendientes
 
-- Recibir, auditar e integrar los simuladores adicionales del examen final.
+- Compilar y validar el proyecto fuente I/O Simulator (React/Vite) antes de habilitar su acceso desde Laboratorio.
+- Solicitar el código ejecutable de SyncWatch; el paquete recibido contiene únicamente el informe PDF.
+- Completar pruebas manuales de interacción de cada simulador en distintos navegadores y dispositivos.
 - Incorporar las URL oficiales de Facebook e Instagram.
 - Realizar pruebas manuales completas en navegadores y dispositivos reales.
 - Revisar académicamente los talleres, juegos y evaluaciones.
@@ -48,4 +52,4 @@ Los OVA de los estudiantes mantienen sus interfaces internas y controles origina
 El repositorio incluye `.github/workflows/deploy-pages.yml`. GitHub Pages está configurado para publicar con GitHub Actions. El workflow despliega el sitio cuando se actualiza la rama `main` o se ejecuta manualmente.
 
 URL prevista: `https://alvaros1705-cloud.github.io/OVA_SISTEMAS_OPERATIVOS/`.
-Los recursos de la versión v0.4 usan identificadores de versión para forzar la actualización de los archivos JavaScript y evitar reutilizar scripts antiguos desde la caché del navegador. Si ya tienes el OVA abierto, recárgalo con Ctrl+F5.
+Los recursos de la versión v0.5 usan identificadores de versión para forzar la actualización de los archivos JavaScript y evitar reutilizar scripts antiguos desde la caché del navegador. Si ya tienes el OVA abierto, recárgalo con Ctrl+F5.
