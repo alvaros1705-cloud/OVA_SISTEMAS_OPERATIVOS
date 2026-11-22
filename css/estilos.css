@@ -1855,3 +1855,13 @@ html[data-theme="light"] :focus-visible {
     transition-duration: 180ms;
   }
 }
+
+html[data-theme="light"] .opcion--correcta .opcion__texto {
+  color: #155b2d;
+  font-weight: 700;
+}
+
+html[data-theme="light"] .opcion--incorrecta .opcion__texto {
+  color: #8a2828;
+  font-weight: 700;
+}
