@@ -21,7 +21,7 @@ Portal del Objeto Virtual de Aprendizaje del curso Sistemas Operativos (código 
 - Diseño institucional inspirado en la referencia de la OVA de Modelos, adaptado a Sistemas Operativos.
 - Verde oficial `#09843B` y logotipo institucional conservado sin alteraciones.
 - Modo claro/oscuro y selector español/inglés en el portal y en el OVA CORE.
-- Navegación entre cortes que devuelve el aula al inicio del contenido.
+- Navegación entre cortes que devuelve el contenedor integrado al encabezado de la unidad.
 - Plataforma de evaluación con acceso directo como invitado, sin exigir nombre ni semestre al ingresar.
 - Tres bloques diferenciados por color: azul, amarillo y rosa.
 - Propósito, objetivos, competencia e información académica del PAC.
@@ -48,3 +48,4 @@ Los OVA de los estudiantes mantienen sus interfaces internas y controles origina
 El repositorio incluye `.github/workflows/deploy-pages.yml`. GitHub Pages está configurado para publicar con GitHub Actions. El workflow despliega el sitio cuando se actualiza la rama `main` o se ejecuta manualmente.
 
 URL prevista: `https://alvaros1705-cloud.github.io/OVA_SISTEMAS_OPERATIVOS/`.
+Los recursos de la versión v0.4 usan identificadores de versión para forzar la actualización de los archivos JavaScript y evitar reutilizar scripts antiguos desde la caché del navegador. Si ya tienes el OVA abierto, recárgalo con Ctrl+F5.
