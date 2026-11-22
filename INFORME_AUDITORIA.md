@@ -118,3 +118,14 @@ Estas comprobaciones no sustituyen una prueba manual de navegación, interacció
 - Versiones de recursos para evitar caché: portal `portal.css?v=0.8` y `portal.js?v=0.7`; aula `css/estilos.css?v=0.8` y `js/app.js?v=0.6`.
 - Validación estática posterior a los cambios: sintaxis JavaScript del portal y del aula comprobada; balance de llaves en ambas hojas CSS comprobado; enlaces y atributos de versiones cotejados en los HTML; selector de traducción limitado a enlaces internos.
 - Limitación de validación: el navegador automatizado no pudo iniciar por saldo agotado del servicio externo; el navegador web de esta sesión tampoco pudo abrir GitHub Pages ni las redes sociales. Por lo tanto, no se declara una prueba visual/click end-to-end de producción como completada.
+
+
+## Pestañas externas y animación del título principal v0.9 (22/11/2026)
+
+- Se corrigió la apertura de Facebook e Instagram en la portada y en el aula: ambos enlaces usan ahora `target="_blank"` con `rel="noopener noreferrer"`, evitando reemplazar la página del OVA.
+- Se conservó la traducción del menú limitada a las anclas internas, sin modificar el SVG ni el destino de los enlaces externos.
+- El título de portada activa mediante JavaScript la clase `hero-title-motion` cuando la preferencia del dispositivo permite movimiento y la pestaña está visible.
+- CSS aplica una entrada suave al título y un degradado animado de verde, menta y blanco al texto «Operativos». El movimiento se desactiva para usuarios con `prefers-reduced-motion`.
+- Versiones de caché de la portada: `portal.css?v=0.9` y `portal.js?v=0.8`.
+- Validación estática: los cuatro enlaces sociales de portada/aula tienen `target="_blank"`; el traductor no reescribe enlaces externos; JavaScript válido; CSS balanceado.
+- La apertura en una pestaña separada está configurada en los atributos HTML. No se realizó una prueba de clic en navegador por la indisponibilidad del navegador automatizado.
