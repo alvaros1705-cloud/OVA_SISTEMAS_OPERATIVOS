@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="css/estilos.css?v=0.5">
 </head>
 <body>
 
@@ -29,9 +29,14 @@
         </span>
       </a>
 
-      <a class="volver-portal" href="index.html" aria-label="Volver al portal institucional">
-        <span aria-hidden="true">←</span> Portal institucional
-      </a>
+      <div class="nav-quick-links" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <a class="volver-portal" href="index.html" aria-label="Volver al portal institucional">
+          <span aria-hidden="true">←</span> Portal institucional
+        </a>
+        <a class="volver-portal" href="laboratorio/index.html" aria-label="Abrir Laboratorio de simuladores">
+          <span aria-hidden="true">⌘</span> Laboratorio
+        </a>
+      </div>
 
       <div class="navbar__acciones">
         <button class="estudiante" type="button" id="estudianteBoton" hidden>
@@ -209,6 +214,6 @@
     </div>
   </section>
 
-  <script src="js/app.js?v=0.4"></script>
+  <script src="js/app.js?v=0.5"></script>
 </body>
 </html>
