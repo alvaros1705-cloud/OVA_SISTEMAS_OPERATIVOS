@@ -141,7 +141,7 @@
     $('.main-nav')?.setAttribute('aria-label', d.navAria);
     $('.social-links')?.setAttribute('aria-label', d.socialAria);
     $('#menuToggle')?.setAttribute('aria-label', language === 'es' ? 'Abrir menú' : 'Open menu');
-    $('.main-nav a[href^="#"]').forEach((el,i)=>write(el,d.nav[i]||''));
+    $$('.main-nav a[href^="#"]').forEach((el,i)=>write(el,d.nav[i]||''));
     $$('.language-button').forEach(btn=>{const active=btn.dataset.portalLang===language;btn.classList.toggle('is-active',active);btn.setAttribute('aria-pressed',String(active));});
     write($('.eyebrow'), d.eyebrow);
     write($('#heroTitle'), d.heroTitle, true);
