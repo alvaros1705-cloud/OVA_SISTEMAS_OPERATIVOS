@@ -1581,8 +1581,10 @@ function renderRuta() {
 }
 
 function seleccionarUnidad(indice) {
+  // Seleccionar un corte siempre devuelve el aula a su inicio. No debe abrir
+  // el primer recurso ni desplazar al estudiante directamente al cuestionario.
   if (indice === unidadActiva) {
-    abrirLector(cortes[indice].activos[0]);
+    window.scrollTo({ top: 0, behavior: "smooth" });
     return;
   }
 
@@ -1594,10 +1596,8 @@ function seleccionarUnidad(indice) {
   renderPreguntas();
   actualizarProgreso();
 
-  const primera = preguntasEl.querySelector(".pregunta");
-  if (primera) {
-    primera.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
+  // El nuevo corte debe mostrarse desde su encabezado y descripción.
+  requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: "smooth" }));
 }
 
 function aplicarIdioma(nuevoIdioma) {
