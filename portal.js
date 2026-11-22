@@ -209,4 +209,53 @@
   }
   setTheme(theme,false);
   applyLanguage(language,false);
+}
+
+  // La animación del procesador se activa desde JavaScript y sus movimientos
+  // se definen en portal.css. Se pausa cuando la pestaña no está visible o
+  // cuando el usuario solicita movimiento reducido.
+  function initHeroMotion() {
+    const visual = document.querySelector('.hero-visual');
+    if (!visual) return;
+
+    const card = visual.querySelector('.chip-card');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const syncMotion = () => {
+      const shouldAnimate = !reduceMotion.matches && !document.hidden;
+      visual.classList.toggle('motion-active', shouldAnimate);
+      visual.classList.toggle('motion-paused', !shouldAnimate);
+      if (!shouldAnimate && card) {
+        card.style.setProperty('--parallax-x', '0px');
+        card.style.setProperty('--parallax-y', '0px');
+      }
+    };
+
+    syncMotion();
+    document.addEventListener('visibilitychange', syncMotion);
+    if (typeof reduceMotion.addEventListener === 'function') {
+      reduceMotion.addEventListener('change', syncMotion);
+    } else if (typeof reduceMotion.addListener === 'function') {
+      reduceMotion.addListener(syncMotion);
+    }
+
+    if (card) {
+      visual.addEventListener('pointermove', event => {
+        if (reduceMotion.matches || event.pointerType === 'touch') return;
+        const rect = visual.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        card.style.setProperty('--parallax-x', (x * -12).toFixed(1) + 'px');
+        card.style.setProperty('--parallax-y', (y * -8).toFixed(1) + 'px');
+      }, { passive: true });
+
+      visual.addEventListener('pointerleave', () => {
+        card.style.setProperty('--parallax-x', '0px');
+        card.style.setProperty('--parallax-y', '0px');
+      }, { passive: true });
+    }
+  }
+
+  initHeroMotion();
 })();
