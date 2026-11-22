@@ -204,7 +204,6 @@ html[data-theme="dark"] .main-nav.open{background:#10291b}
     transition: none !important;
   }
 }
-}
 
 @media (max-width: 650px) {
   .main-nav .social-links {
