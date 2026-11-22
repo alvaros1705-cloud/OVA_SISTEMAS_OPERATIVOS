@@ -1551,7 +1551,6 @@ function renderRuta() {
       "aria-label",
       `${t("unitWord")} ${corte.icono}: ${corte.titulo[idioma]}`
     );
-    boton.title = `${t("unitWord")} ${corte.icono} — ${corte.titulo[idioma]}`;
     if (activo) boton.setAttribute("aria-current", "step");
 
     const icono = document.createElement("span");
