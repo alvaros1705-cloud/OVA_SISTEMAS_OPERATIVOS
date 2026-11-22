@@ -1865,3 +1865,104 @@ html[data-theme="light"] .opcion--incorrecta .opcion__texto {
   color: #8a2828;
   font-weight: 700;
 }
+
+
+/* v0.7 — estados coherentes para la ruta y los recursos en el modo claro. */
+html[data-theme="light"] .modulo--disponible:hover {
+  background: #edf7f0;
+  border-color: #91c5a0;
+  color: #193b28;
+}
+
+html[data-theme="light"] .modulo--activo,
+html[data-theme="light"] .modulo--activo:hover,
+html[data-theme="light"] .modulo--activo:focus-visible {
+  background: linear-gradient(112deg, #087d38 0%, #1b9b52 100%);
+  border-color: #087d38;
+  color: #ffffff;
+  box-shadow: 0 9px 24px rgba(9, 132, 59, .2);
+}
+
+html[data-theme="light"] .modulo--activo .modulo__texto strong {
+  color: #ffffff;
+}
+
+html[data-theme="light"] .modulo--activo .modulo__texto small {
+  color: #e1f5e7;
+}
+
+html[data-theme="light"] .modulo--activo .modulo__icono {
+  background: rgba(255, 255, 255, .16);
+  border-color: rgba(255, 255, 255, .38);
+  color: #ffffff;
+}
+
+html[data-theme="light"] .activo {
+  background: #f7fbf8;
+  border-color: #d5e5da;
+  color: #203d2b;
+  box-shadow: 0 3px 12px rgba(22, 73, 39, .035);
+}
+
+html[data-theme="light"] .activo__texto strong {
+  color: #203d2b;
+}
+
+html[data-theme="light"] .activo__texto small {
+  color: #657b6b;
+}
+
+html[data-theme="light"] .activo__icono {
+  background: #eaf6ee;
+  border-color: #c7e1cf;
+  color: #08783a;
+}
+
+html[data-theme="light"] .activo__flecha {
+  color: #087b96;
+}
+
+html[data-theme="light"] .activo:hover,
+html[data-theme="light"] .activo:focus-visible {
+  background: #edf8f1;
+  border-color: #8bc39d;
+  color: #173b27;
+  box-shadow: 0 8px 20px rgba(22, 93, 47, .08);
+  transform: translateY(-2px);
+}
+
+html[data-theme="light"] .activo:hover .activo__texto strong,
+html[data-theme="light"] .activo:focus-visible .activo__texto strong {
+  color: #173b27;
+}
+
+html[data-theme="light"] .activo--visitado {
+  background: #eff8f1;
+  border-color: #a9d5b5;
+}
+
+html[data-theme="light"] .activo--visitado .activo__texto small::after {
+  color: #08783a;
+}
+
+html[data-theme="light"] .activo:disabled {
+  background: #f1f4f2;
+  border-color: #dce5de;
+  color: #68796d;
+  cursor: not-allowed;
+  opacity: .8;
+  box-shadow: none;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html[data-theme="light"] .modulo,
+  html[data-theme="light"] .activo {
+    transition:
+      background-color 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease,
+      color 180ms ease,
+      transform 180ms ease;
+  }
+}
