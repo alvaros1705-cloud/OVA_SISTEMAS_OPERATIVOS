@@ -71,3 +71,17 @@ Estas comprobaciones no sustituyen una prueba manual de navegación, interacció
 - La plataforma mantiene su sesión `Invitado / Acceso libre` y oculta explícitamente el formulario de registro al iniciar.
 - Se añadieron identificadores `v=0.4` en las rutas y recursos afectados para evitar que el navegador reutilice JavaScript antiguo.
 - Requiere recarga completa de pestañas abiertas previamente (Ctrl+F5) para sustituir los recursos almacenados en caché.
+
+
+## Integración del Laboratorio v0.5 (22/11/2026)
+
+- Se habilitó el módulo **Laboratorio** como catálogo central de simuladores, con búsqueda y orden alfabético por el nombre propio del simulador, sin usar nombres de carpetas ni nombres de estudiantes.
+- Se añadieron accesos al Laboratorio desde la página principal (index.html) y desde la navegación del aula (aula.html). Se actualizó la navegación bilingüe del portal.
+- Se integraron nueve simuladores locales como paquetes HTML autónomos comprimidos: CPU Arena, Deadlock Hunter, DiskLab, DiskSim Pro, Grafos y Avestruz, IO/LAB, algoritmo del banquero, condiciones de Coffman y planificación del brazo del disco.
+- Los HTML originales se conservaron. Cuando una entrega separaba HTML, CSS y JavaScript, los archivos relacionados se agruparon en un documento autónomo respetando el contenido y el orden de ejecución; no se reemplazó la interfaz por una plantilla común.
+- Se añadieron dos accesos a sitios publicados por sus proyectos: IPC Messenger y SIM-01. Ambos se abren en una pestaña nueva y permanecen alojados en sus direcciones originales.
+- El inventario muestra **11 simuladores disponibles**: nueve integrados como paquetes locales y dos enlazados a sus sitios publicados.
+- **I/O Simulator — Simulador de Periféricos & Interrupciones** queda en preparación: se recibió el código React/Vite, pero no una compilación estática validada para Pages.
+- **SyncWatch** queda pendiente de entrega ejecutable: el paquete recibido contiene solamente el informe PDF, no la aplicación ni sus archivos fuente.
+- Validación local: se verificó la descompresión gzip/base64 de los nueve paquetes y la sintaxis JavaScript de los scripts extraídos. Se comprobó la presencia y el tamaño exacto de los nueve archivos publicados en GitHub.
+- Se verificó que GitHub Pages sirve el portal principal y la página del Laboratorio con el nuevo contenido. La interacción completa de cada simulador todavía debe probarse manualmente en navegadores y dispositivos reales.
