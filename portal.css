@@ -99,3 +99,56 @@ html[data-theme="dark"] .main-nav.open{background:#10291b}
 @media(max-width:1160px){.preference-controls{gap:5px}.theme-toggle{padding:8px 9px}.theme-toggle #themeToggleLabel{display:none}.brand-logo-plate{padding:4px 6px}.brand img{width:190px}}
 @media(max-width:900px){.preference-controls{margin-left:auto}.social-links{margin-left:0}.header-inner{gap:10px}.main-nav.open{top:100%}}
 @media(max-width:650px){.preference-controls{gap:4px}.language-switch{padding:2px}.language-button{padding:7px 8px}.theme-toggle{width:36px;height:34px;padding:0}.theme-toggle #themeToggleLabel{display:none}.theme-toggle-icon{font-size:16px}.brand-logo-plate{padding:3px 5px}.brand img{width:155px;height:48px}.footer-logo-plate{max-width:230px}}
+
+/* v0.6 — movimiento ambiental sutil para la ilustración principal del portal. */
+@keyframes os-chip-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-3deg); }
+  50% { transform: translate3d(0, -10px, 0) rotate(-1.7deg); }
+}
+@keyframes os-note-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+@keyframes os-orbit-breathe {
+  0%, 100% { transform: scale(1); opacity: .72; }
+  50% { transform: scale(1.045); opacity: 1; }
+}
+@keyframes os-online-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(57,217,138,.13), 0 0 0 0 rgba(57,217,138,0); }
+  50% { box-shadow: 0 0 0 4px rgba(57,217,138,.16), 0 0 0 8px rgba(57,217,138,.08); }
+}
+.hero-visual .chip-card {
+  animation: os-chip-float 7.5s ease-in-out infinite;
+  transform-origin: 50% 52%;
+  will-change: transform;
+}
+.hero-visual .orbit-one { animation: os-orbit-breathe 8s ease-in-out infinite; }
+.hero-visual .orbit-two { animation: os-orbit-breathe 8s ease-in-out -4s infinite; }
+.hero-visual .note-a { animation: os-note-float 5.5s ease-in-out infinite; }
+.hero-visual .note-b { animation: os-note-float 6.5s ease-in-out -2.5s infinite; }
+.hero-visual .chip-live i { animation: os-online-pulse 2.4s ease-in-out infinite; }
+.social-placeholder {
+  border-radius: 8px;
+  transition: color .18s ease, opacity .18s ease, transform .18s ease, background .18s ease;
+}
+.social-placeholder:hover,
+.social-placeholder:focus-visible {
+  color: var(--green);
+  opacity: 1;
+  transform: translateY(-2px);
+}
+.social-placeholder:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-visual .chip-card,
+  .hero-visual .orbit-one,
+  .hero-visual .orbit-two,
+  .hero-visual .note-a,
+  .hero-visual .note-b,
+  .hero-visual .chip-live i {
+    animation: none !important;
+    will-change: auto;
+  }
+}
