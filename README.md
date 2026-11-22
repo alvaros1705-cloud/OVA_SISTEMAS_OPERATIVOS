@@ -21,6 +21,8 @@ Portal del Objeto Virtual de Aprendizaje del curso Sistemas Operativos (código 
 - Diseño institucional inspirado en la referencia de la OVA de Modelos, adaptado a Sistemas Operativos.
 - Verde oficial `#09843B` y logotipo institucional conservado sin alteraciones.
 - Modo claro/oscuro y selector español/inglés en el portal y en el OVA CORE.
+- Navegación entre cortes que devuelve el aula al inicio del contenido.
+- Plataforma de evaluación con acceso directo como invitado, sin exigir nombre ni semestre al ingresar.
 - Tres bloques diferenciados por color: azul, amarillo y rosa.
 - Propósito, objetivos, competencia e información académica del PAC.
 - Plan de actividades de 16 semanas conforme al apartado 14 del PAC.
