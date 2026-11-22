@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#09843B">
+<title>Laboratorio | OVA Sistemas Operativos</title>
+<style>
+:root{--green:#09843b;--deep:#064b29;--ink:#173522;--muted:#637267;--line:#dce8df;--amber:#fff8e9}
+*{box-sizing:border-box}body{margin:0;background:#f5f8f5;color:var(--ink);font:15px/1.55 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+.top{background:linear-gradient(115deg,#063e23,#09843b);color:#fff;border-bottom:5px solid #f2ad22}
+.topin{width:min(1200px,92%);margin:auto;min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.brand{text-decoration:none;color:white;font-weight:800;font-size:19px}.brand small{display:block;color:#ccead5;font-size:10px;letter-spacing:.16em}
+.links{display:flex;gap:9px;flex-wrap:wrap}.links a{color:white;text-decoration:none;border:1px solid #ffffff60;border-radius:99px;padding:7px 12px;font-size:11px;font-weight:800}
+main{width:min(1200px,92%);margin:auto}.intro{padding:45px 0 25px;display:flex;justify-content:space-between;align-items:end;gap:20px}
+.kicker{color:var(--green);font-size:10px;font-weight:900;letter-spacing:.16em}.intro h1{margin:8px 0;color:var(--deep);font-size:clamp(34px,5vw,52px);line-height:1.04}.intro p{max-width:720px;margin:0;color:var(--muted);font-size:14px}
+.stats{display:flex;gap:9px}.stat{background:white;border:1px solid var(--line);border-radius:13px;padding:12px 17px;text-align:center;min-width:85px}.stat b{display:block;color:var(--green);font-size:25px}.stat span{font-size:9px;color:var(--muted);font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.tools{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:20px 0 14px}.tools h2{font-size:20px;color:var(--deep);margin:0}.search{width:min(340px,100%);padding:10px 13px;border:1px solid #cbdccc;border-radius:10px;font:inherit;background:white}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.card{background:white;border:1px solid var(--line);border-radius:16px;padding:18px;min-height:195px;display:flex;flex-direction:column;box-shadow:0 4px 16px #143c1b08}.card-head{display:flex;justify-content:space-between;align-items:center;gap:8px}.num{height:38px;width:38px;border-radius:11px;background:#e8f5ec;color:var(--green);display:grid;place-items:center;font-weight:900}.tag{background:#edf5ef;color:#2f6942;border-radius:99px;padding:5px 8px;font-size:9px;font-weight:900;text-transform:uppercase}.card h3{font-size:16px;line-height:1.28;color:#173c25;margin:13px 0 6px}.card p{font-size:11px;color:#6a786e;margin:0 0 15px;line-height:1.65}.action{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px}.origin{font-size:9px;color:#8a988d;font-weight:700}.btn{border:0;border-radius:9px;background:var(--green);color:white;padding:9px 12px;font:inherit;font-size:10px;font-weight:900;text-decoration:none;cursor:pointer}.btn:hover{background:#076b30}.btn.ext{background:#0d6b7d}
+.pending{margin:35px 0 20px;background:var(--amber);border:1px solid #efdfba;border-radius:16px;padding:19px}.pending h2{margin:0 0 12px;color:#775300;font-size:16px}.pending-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.pending article{background:#fffdf8;border:1px solid #ead8aa;border-radius:11px;padding:13px}.pending strong{font-size:13px;color:#644b12}.pending p{font-size:11px;color:#806f4c;margin:5px 0}.status{color:#8a5d00;font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}
+.note{margin:22px 0 40px;padding:14px 16px;border-left:4px solid #0a8e4a;background:#eaf5ed;border-radius:0 11px 11px 0;color:#42624a;font-size:11px}.foot{background:#073e24;color:#c8dfce;text-align:center;padding:18px;font-size:10px}
+.overlay{position:fixed;inset:0;background:#06150def;z-index:100;display:flex;flex-direction:column;padding:12px}.overlay[hidden]{display:none}.bar{height:46px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:10px;color:white;padding:0 4px 10px}.bar strong{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.close{border:1px solid #ffffff55;border-radius:99px;background:#ffffff17;color:white;padding:7px 12px;font-weight:900;cursor:pointer}.wrap{flex:1;min-height:0;border-radius:11px;overflow:hidden;background:white}.frame{width:100%;height:100%;border:0;background:white}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.intro{display:block}.stats{margin-top:18px}}@media(max-width:600px){.topin{padding:12px 0;align-items:flex-start;flex-direction:column}.links{width:100%}.intro{padding-top:30px}.tools{align-items:stretch;flex-direction:column}.search{width:100%}.grid{grid-template-columns:1fr}.pending-grid{grid-template-columns:1fr}.card{min-height:175px}.overlay{padding:6px}}
+</style></head>
+<body>
+<header class="top"><div class="topin"><a class="brand" href="../index.html"><small>OVA · SISTEMAS OPERATIVOS</small>Laboratorio</a><nav class="links"><a href="../index.html">← Portal OVA</a><a href="../aula.html">Aula de aprendizaje</a></nav></div></header>
+<main>
+<section class="intro"><div><div class="kicker">EXPERIMENTACIÓN · RECURSOS INTERACTIVOS</div><h1>Laboratorio de simuladores</h1><p>Explora, configura y experimenta con los laboratorios de Sistemas Operativos. Cada simulador conserva su interfaz, sus controles y su experiencia original; este espacio funciona como punto de acceso centralizado.</p></div><div class="stats"><div class="stat"><b id="count">11</b><span>Disponibles</span></div><div class="stat"><b>02</b><span>En preparación</span></div></div></section>
+<section><div class="tools"><h2>Simuladores disponibles</h2><input id="search" class="search" type="search" placeholder="Buscar por nombre o tema…" aria-label="Buscar simuladores"></div><div class="grid" id="grid"></div></section>
+<section class="pending"><h2>Material en preparación</h2><div class="pending-grid">
+<article><strong>I/O Simulator — Simulador de Periféricos &amp; Interrupciones</strong><p>Se recibió el proyecto fuente React/Vite, pero no incluye una compilación de producción lista para GitHub Pages. Se requiere completar el build y validar su configuración antes de publicar el acceso.</p><span class="status">Pendiente de compilación y validación</span></article>
+<article><strong>SyncWatch</strong><p>En el paquete se recibió el informe PDF, pero no la aplicación ejecutable ni sus archivos fuente. Se incorporará cuando se entregue el simulador.</p><span class="status">Pendiente del código ejecutable</span></article>
+</div></section>
+<p class="note"><b>Nota de integración:</b> los simuladores locales se muestran en un visor que carga sus documentos originales sin reconstruir sus pantallas. IPC Messenger y SIM-01 abren sus sitios publicados de origen.</p>
+</main>
+<footer class="foot">Universidad Simón Bolívar · Ingeniería de Sistemas · OVA de Sistemas Operativos</footer>
+<div class="overlay" id="overlay" hidden role="dialog" aria-modal="true" aria-labelledby="simTitle"><div class="bar"><strong id="simTitle">Simulador</strong><button class="close" id="close" type="button">Cerrar ✕</button></div><div class="wrap"><iframe class="frame" id="frame" title="Simulador interactivo" sandbox="allow-scripts allow-same-origin allow-forms allow-modals allow-popups allow-downloads"></iframe></div></div>
+<script>
+(function(){
+var items=[
+{name:'CPU Arena',desc:'Simulador de planificación de CPU y estados de procesos.',cat:'Procesos',id:'cpu-arena'},
+{name:'Deadlock Hunter',desc:'Experimenta con interbloqueos, prevención, detección y pruebas.',cat:'Concurrencia',id:'deadlock'},
+{name:'DiskLab — Simulador de errores en discos',desc:'Diagnóstico, inyección de errores y reparación de discos.',cat:'Almacenamiento',id:'disklab'},
+{name:'DiskSim Pro — Laboratorio Experimental de Planificación de E/S',desc:'Compara algoritmos y cargas de trabajo para la planificación de entrada/salida.',cat:'E/S y discos',id:'disksim-pro'},
+{name:'Grafos y Avestruz — Grafos de Asignación de Recursos y Algoritmo del Avestruz',desc:'Modela grafos de asignación de recursos y analiza el tratamiento de interbloqueos.',cat:'Concurrencia',id:'grafos'},
+{name:'IO/LAB — Laboratorio de Entrada, Salida y Discos',desc:'Explora el flujo de entrada/salida y el almacenamiento.',cat:'E/S y discos',id:'io-lab'},
+{name:'IPC Messenger',desc:'Colas de mensajes, tuberías, memoria compartida y escenarios de fallos.',cat:'Comunicación entre procesos',url:'https://ipc-messenger-4n1z.vercel.app/'},
+{name:'SIM-01 — Simulador embebido',desc:'Reloj del sistema, disco en RAM, sistema de archivos RAMFS1 y terminal.',cat:'Sistemas embebidos',url:'https://cruzkarol118-ops.github.io/Trabajo-sistemas-operativos/'},
+{name:'Simulador de bloqueos · Algoritmo del banquero',desc:'Evasión, detección y recuperación de bloqueos mediante el algoritmo del banquero.',cat:'Concurrencia',id:'banquero'},
+{name:'Simulador de bloqueos — Condiciones de Coffman',desc:'Condiciones necesarias para el interbloqueo y grafo de asignación de recursos.',cat:'Concurrencia',id:'coffman'},
+{name:'Simulador de planificación del brazo del disco',desc:'Simula recorridos y compara políticas de planificación del brazo del disco.',cat:'Almacenamiento',id:'planificacion-disco'}
+];
+items.sort(function(a,b){return a.name.localeCompare(b.name,'es',{sensitivity:'base'});});
+var grid=document.getElementById('grid'),search=document.getElementById('search'),overlay=document.getElementById('overlay'),frame=document.getElementById('frame');
+function node(tag,cls,txt){var el=document.createElement(tag);if(cls)el.className=cls;if(txt!==undefined)el.textContent=txt;return el;}
+function render(filter){
+grid.innerHTML='';var q=(filter||'').trim().toLocaleLowerCase('es');var found=items.filter(function(x){return (x.name+' '+x.desc+' '+x.cat).toLocaleLowerCase('es').indexOf(q)>=0;});
+if(!found.length){grid.appendChild(node('div','card','No se encontraron simuladores con ese criterio.'));return;}
+found.forEach(function(x,i){var card=node('article','card'),head=node('div','card-head'),num=node('span','num',String(i+1).padStart(2,'0')),tag=node('span','tag',x.cat),h=node('h3','',x.name),p=node('p','',x.desc),action=node('div','action'),origin=node('span','origin',x.url?'Sitio publicado':'Integrado en el OVA'),btn;
+head.append(num,tag);action.appendChild(origin);
+if(x.url){btn=node('a','btn ext','Abrir sitio ↗');btn.href=x.url;btn.target='_blank';btn.rel='noopener noreferrer';}
+else{btn=node('button','btn','Abrir simulador →');btn.type='button';btn.addEventListener('click',function(){openSim(x.id,x.name);});}
+action.appendChild(btn);card.append(head,h,p,action);grid.appendChild(card);
+});
+}
+function openSim(id,name){
+document.getElementById('simTitle').textContent=name;overlay.hidden=false;document.body.style.overflow='hidden';
+frame.srcdoc='<p style="font:14px system-ui;padding:24px;color:#345">Preparando simulador…</p>';
+fetch('payloads/'+encodeURIComponent(id)+'.html.gz.b64?v=1',{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('No se pudo cargar el paquete ('+r.status+').');return r.text();}).then(function(encoded){
+var binary=atob(encoded.trim()),bytes=new Uint8Array(binary.length);for(var i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
+if(!('DecompressionStream' in window))throw new Error('Actualiza el navegador para abrir este simulador.');
+return new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
+}).then(function(html){frame.srcdoc=html;}).catch(function(err){frame.srcdoc='<main style="font:15px system-ui;padding:30px;color:#8a2e22"><h2>No fue posible abrir el simulador</h2><p>'+String(err.message)+'</p></main>';});
+}
+function close(){overlay.hidden=true;frame.srcdoc='';document.body.style.overflow='';}
+search.addEventListener('input',function(){render(search.value);});document.getElementById('close').addEventListener('click',close);
+overlay.addEventListener('click',function(e){if(e.target===overlay)close();});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!overlay.hidden)close();});
+document.getElementById('count').textContent=items.length;render('');
+})();
+</script></body></html>
