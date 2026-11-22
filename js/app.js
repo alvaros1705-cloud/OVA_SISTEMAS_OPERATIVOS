@@ -1078,6 +1078,7 @@ function registrarVisita(corte, activo) {
 
   visitados.push(clave);
   guardarVisitados();
+  notificarProgresoSCORM();
   renderActivos();
   if (!resumen.hidden) renderResumen();
 }
@@ -1465,6 +1466,42 @@ function actualizarProgreso() {
   const completado = respondidasGlobal === totalGlobal;
   badgeGlobal.textContent = completado ? t("completed") : t("inProgress");
   badgeGlobal.classList.toggle("completado", completado);
+  notificarProgresoSCORM();
+}
+
+function notificarProgresoSCORM() {
+  const total = cortes.reduce((suma, corte) => suma + corte.preguntas.length, 0);
+  let respondidas = 0;
+  let aciertos = 0;
+
+  cortes.forEach((corte) => {
+    const almacen = respuestasDe(corte);
+    corte.preguntas.forEach((pregunta) => {
+      const valor = almacen[pregunta.id];
+      if (valor !== undefined) {
+        respondidas++;
+        if (Number(valor) === pregunta.correcta) aciertos++;
+      }
+    });
+  });
+
+  const porcentaje = total ? Math.round((aciertos / total) * 100) : 0;
+  const progreso = {
+    total,
+    respondidas,
+    aciertos,
+    porcentaje,
+    completado: total > 0 && respondidas >= total,
+    unidad: unidadActiva + 1,
+    visitados: new Set(visitados).size
+  };
+
+  try {
+    window.parent.postMessage(
+      { type: "OVA_SCORM_PROGRESS", payload: progreso },
+      window.location.origin
+    );
+  } catch (e) {}
 }
 
 function renderUnidad() {
