@@ -111,3 +111,5 @@ applyTheme();
 student = { name: 'Invitado', semester: 'Acceso libre' };
 renderHome();
 show('home');
+document.getElementById('login')?.classList.add('hidden');
+document.getElementById('home')?.classList.remove('hidden');
