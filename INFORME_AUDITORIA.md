@@ -96,3 +96,13 @@ Estas comprobaciones no sustituyen una prueba manual de navegación, interacció
 - Se conserva la separación entre el portal, el aula y las OVAs temáticas para no imponer una plantilla única ni alterar los diseños originales de los materiales.
 - El portal y el aula comparten la clave de preferencia `ovaTema`, por lo que la selección de modo claro/oscuro se mantiene entre ambas páginas.
 - Validación estática: se confirmó el enlace CSS/JS de las páginas principales y el balance de llaves del archivo CSS actualizado. La comprobación visual definitiva de todos los estados debe realizarse en navegador con los modos claro y oscuro.
+
+
+## Ajustes de interacción visual y redes sociales v0.7 (22/11/2026)
+
+- Portada: se añadió movimiento ambiental discreto a la tarjeta gráfica del procesador, órbitas, etiquetas flotantes y el indicador de conexión. La animación respeta `prefers-reduced-motion`.
+- Aula: se corrigió el estado `hover` de la unidad activa para que conserve su fondo verde y textos claros; las otras unidades mantienen contraste en el modo claro.
+- Corte 03: se definieron superficies claras y tipografía oscura para todos los recursos no visitados. Los recursos visitados conservan un resaltado verde diferenciado, y el foco/hover ofrece una señal visual sin oscurecer el contenido.
+- Redes institucionales: se conectaron los iconos de Facebook e Instagram en la cabecera del portal y del aula a las cuentas oficiales proporcionadas por el docente. Los enlaces abren en una pestaña nueva con protección `noopener noreferrer`.
+- Caché de estilos: portal `portal.css?v=0.6`; aula `css/estilos.css?v=0.7`.
+- No se modificaron los textos académicos, los bancos de preguntas ni el flujo de evaluación. Se conservan las hojas de estilo y scripts propios de cada OVA temática.
