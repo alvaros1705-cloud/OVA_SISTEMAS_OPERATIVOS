@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Plataforma de Evaluación | Universidad Simón Bolívar</title>
-<link rel="stylesheet" href="styles.css">
+<meta name="ova-access-mode" content="guest">
+<link rel="stylesheet" href="styles.css?v=0.4">
 </head>
 <body>
 <header class="top"><div class="top-inner"><div class="brand"><span class="brandmark">US</span><div><b>Universidad Simón Bolívar</b><small>Ingeniería de Sistemas · Plataforma académica</small></div></div><div class="header-actions">
@@ -11,7 +12,7 @@
 <button id="translateBtn" class="ghost translate-btn" type="button">Traducir</button>
 </div></div></header>
 <main class="wrap">
-<section id="login" class="panel login hidden">
+<section id="login" class="panel login hidden" aria-hidden="true">
 <p class="eyebrow">ÁREA DE APRENDIZAJE</p><h1>Bienvenido</h1><p class="muted">Ingresa tus datos para comenzar.</p>
 <form id="loginForm"><label>Nombre completo</label><input id="studentName" required maxlength="100" placeholder="Tu nombre completo"><label>Semestre que cursas</label><select id="semester" required><option value="">Selecciona</option><option>1.º semestre</option><option>2.º semestre</option><option>3.º semestre</option><option>4.º semestre</option><option>5.º semestre</option><option>6.º semestre</option><option>7.º semestre</option><option>8.º semestre</option><option>9.º semestre</option><option>10.º semestre</option></select><button class="primary">Ingresar</button></form><button id="adminAccess" class="ghost admin-access" type="button">Acceso administrador</button>
 </section>
@@ -34,5 +35,5 @@
 <div class="table-wrap"><table><thead><tr><th>Estudiante / semestre</th><th>Tema</th><th>Nota del juego</th><th>Taller descargado</th><th>Estado</th></tr></thead><tbody id="adminRows"></tbody></table></div>
 <p class="admin-note">Nota: el panel muestra las notas automáticas de los juegos. No registra ni califica los talleres PDF, que se entregan por Aula Extendida.</p>
 </section>
-</main><footer>Universidad Simón Bolívar · Plataforma académica de actividades</footer><script src="app.js"></script>
+</main><footer>Universidad Simón Bolívar · Plataforma académica de actividades</footer><script src="app.js?v=0.4"></script>
 </body></html>
