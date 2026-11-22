@@ -1966,3 +1966,65 @@ html[data-theme="light"] .activo:disabled {
       transform 180ms ease;
   }
 }
+
+
+/* v0.7 — accesos sociales del programa en la barra superior del aula. */
+.social-quick-links {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 6px;
+}
+
+.social-quick-links a {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--texto-suave);
+  background: var(--surface);
+  text-decoration: none;
+  transition: color 180ms ease, background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.social-quick-links svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.social-quick-links a:hover,
+.social-quick-links a:focus-visible {
+  color: #ffffff;
+  background: #087d3b;
+  border-color: #087d3b;
+  transform: translateY(-2px);
+}
+
+html[data-theme="light"] .social-quick-links a {
+  color: #315a3d;
+  background: #f7fbf8;
+  border-color: #d3e4d8;
+}
+
+html[data-theme="light"] .social-quick-links a:hover,
+html[data-theme="light"] .social-quick-links a:focus-visible {
+  color: #ffffff;
+  background: #087d3b;
+  border-color: #087d3b;
+}
+
+@media (max-width: 1100px) {
+  .social-quick-links { gap: 4px; }
+  .social-quick-links a { width: 29px; height: 29px; }
+}
+
+@media (max-width: 760px) {
+  .social-quick-links { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-quick-links a { transition: none; }
+}
