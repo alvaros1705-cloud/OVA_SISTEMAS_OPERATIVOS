@@ -85,3 +85,14 @@ Estas comprobaciones no sustituyen una prueba manual de navegación, interacció
 - **SyncWatch** queda pendiente de entrega ejecutable: el paquete recibido contiene solamente el informe PDF, no la aplicación ni sus archivos fuente.
 - Validación local: se verificó la descompresión gzip/base64 de los nueve paquetes y la sintaxis JavaScript de los scripts extraídos. Se comprobó la presencia y el tamaño exacto de los nueve archivos publicados en GitHub.
 - Se verificó que GitHub Pages sirve el portal principal y la página del Laboratorio con el nuevo contenido. La interacción completa de cada simulador todavía debe probarse manualmente en navegadores y dispositivos reales.
+
+
+## Ajuste de legibilidad y experiencia OVA v0.6 (22/11/2026)
+
+- Se corrigió el tema claro del aula OVA en `css/estilos.css`: ahora las variables globales de fondo, superficies, bordes y tipografía cambian de forma coherente junto con `data-theme="light"`.
+- Se corrigió el contraste de los títulos principales, etiquetas de cada pregunta y texto de las opciones de respuesta. También se definieron colores legibles para opciones seleccionadas, correctas e incorrectas.
+- Se actualizó la referencia de caché del aula a `css/estilos.css?v=0.6`.
+- Auditoría de integración: `index.html` usa `portal.css` y `portal.js`; `aula.html` usa `css/estilos.css` y `js/app.js`. Las páginas de los temas conservan sus recursos CSS/JS específicos o sus bloques integrados cuando se entregaron como documentos autónomos.
+- Se conserva la separación entre el portal, el aula y las OVAs temáticas para no imponer una plantilla única ni alterar los diseños originales de los materiales.
+- El portal y el aula comparten la clave de preferencia `ovaTema`, por lo que la selección de modo claro/oscuro se mantiene entre ambas páginas.
+- Validación estática: se confirmó el enlace CSS/JS de las páginas principales y el balance de llaves del archivo CSS actualizado. La comprobación visual definitiva de todos los estados debe realizarse en navegador con los modos claro y oscuro.
