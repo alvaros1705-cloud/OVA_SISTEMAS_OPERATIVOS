@@ -39,10 +39,10 @@ Los OVA de los estudiantes mantienen sus interfaces internas y controles origina
 - Incorporar las URL oficiales de Facebook e Instagram.
 - Realizar pruebas manuales completas en navegadores y dispositivos reales.
 - Revisar académicamente los talleres, juegos y evaluaciones.
-- Configurar GitHub Pages con origen `GitHub Actions` en Settings → Pages y confirmar la primera ejecución del flujo.
+- GitHub Pages está configurado con origen `GitHub Actions`; comprobar que el workflow complete el despliegue.
 
 ## Publicación
 
-El repositorio incluye `.github/workflows/deploy-pages.yml`. Una vez habilitado GitHub Pages para publicar con GitHub Actions, el flujo desplegará el sitio cuando se actualice la rama `main` o se ejecute manualmente.
+El repositorio incluye `.github/workflows/deploy-pages.yml`. GitHub Pages está configurado para publicar con GitHub Actions. El workflow despliega el sitio cuando se actualiza la rama `main` o se ejecuta manualmente.
 
 URL prevista: `https://alvaros1705-cloud.github.io/OVA_SISTEMAS_OPERATIVOS/`.
