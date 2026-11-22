@@ -685,9 +685,9 @@ const cortes = [
       },
       {
         titulo: { es: "Procesos", en: "Processes" },
-        etiqueta: { es: "Temas", en: "Topics" },
-        ruta: "temas/tema2/OVA_corte2.html",
-        seccion: { tipo: "corte2", pagina: "inicio" }
+        etiqueta: { es: "Tema 04", en: "Topic 04" },
+        ruta: "temas/tema1/OVA_corte1.html",
+        seccion: { tipo: "corte1", indice: 3 }
       },
       {
         titulo: { es: "Talleres y juegos", en: "Workshops & games" },
@@ -868,7 +868,9 @@ const traducciones = {
     visitadosLabel: "Recursos visitados",
     resumenDetalle: "{n} de {total} respuestas correctas · {v} recursos abiertos",
     reiniciarProgreso: "Reiniciar progreso",
-    confirmarReinicio: "Confirmar reinicio"
+    confirmarReinicio: "Confirmar reinicio",
+    themeToDark: "Modo oscuro",
+    themeToLight: "Modo claro"
   },
   en: {
     brandSubtitle: "kernel_learning // simon bolivar university",
@@ -916,13 +918,16 @@ const traducciones = {
     visitadosLabel: "Resources opened",
     resumenDetalle: "{n} of {total} correct answers · {v} resources opened",
     reiniciarProgreso: "Reset progress",
-    confirmarReinicio: "Confirm reset"
+    confirmarReinicio: "Confirm reset",
+    themeToDark: "Dark mode",
+    themeToLight: "Light mode"
   }
 };
 
 const CLAVE_RESPUESTAS = "ovaRespuestas";
 const CLAVE_UNIDAD = "ovaUnidadActiva";
 const CLAVE_IDIOMA = "ovaIdioma";
+const CLAVE_TEMA = "ovaTema";
 const CLAVE_ESTUDIANTE = "ovaEstudiante";
 const CLAVE_VISITADOS = "ovaRecursosVisitados";
 
@@ -939,6 +944,8 @@ const tituloModulo = document.getElementById("tituloModulo");
 const terminalComando = document.getElementById("terminalComando");
 const activosEl = document.getElementById("activos");
 const botonesIdioma = document.querySelectorAll(".idioma__opcion");
+const themeToggle = document.getElementById("themeToggle");
+const themeToggleLabel = document.getElementById("themeToggleLabel");
 const accionGlobal = document.getElementById("accionGlobal");
 const marca = document.getElementById("marca");
 const lector = document.getElementById("lector");
@@ -964,8 +971,13 @@ const reiniciarProgreso = document.getElementById("reiniciarProgreso");
 
 let idioma = leerAlmacen(CLAVE_IDIOMA, "es");
 if (!traducciones[idioma]) idioma = "es";
+let tema = leerAlmacen(CLAVE_TEMA, "light");
+if (!["light", "dark"].includes(tema)) tema = "light";
 
-let unidadActiva = Number(leerAlmacen(CLAVE_UNIDAD, 0));
+const unidadDesdeURL = new URLSearchParams(window.location.search).get("unidad");
+let unidadActiva = unidadDesdeURL !== null
+  ? Number(unidadDesdeURL)
+  : Number(leerAlmacen(CLAVE_UNIDAD, 0));
 if (!Number.isInteger(unidadActiva) || unidadActiva < 0 || unidadActiva >= cortes.length) {
   unidadActiva = 0;
 }
@@ -1305,15 +1317,24 @@ function aplicarSeccionAlFrame() {
         } catch (e) {}
       }
     } else if (seccion.tipo === "corte2") {
-      if (typeof win.showPage === "function") win.showPage(seccion.pagina, false);
-      else {
-        const boton = doc.querySelector(`.nav button[data-page="${seccion.pagina}"]`);
-        if (boton) boton.click();
-      }
-
-      if (seccion.laboratorio) {
-        const laboratorio = doc.querySelector(`[data-lab="${seccion.laboratorio}"]`);
-        if (laboratorio) laboratorio.click();
+      // OVA Corte 2 exposes openT(index), not the showPage API used by an
+      // earlier integration prototype. Map the portal's topic keys to its
+      // actual four-topic order so each card opens the correct lesson.
+      const indicesCorte2 = {
+        laboratorio: 0,
+        distribuidos: 1,
+        hilos: 2,
+        aplicaciones: 3
+      };
+      if (seccion.pagina === "inicio" && typeof win.home === "function") {
+        win.home();
+      } else if (
+        Object.prototype.hasOwnProperty.call(indicesCorte2, seccion.pagina) &&
+        typeof win.openT === "function"
+      ) {
+        win.openT(indicesCorte2[seccion.pagina]);
+      } else if (typeof win.home === "function") {
+        win.home();
       }
     } else if (seccion.hash) {
       const destino = doc.getElementById(seccion.hash) || doc.querySelector(`[data-goto="${seccion.hash}"]`);
@@ -1583,6 +1604,11 @@ function aplicarIdioma(nuevoIdioma) {
   idioma = traducciones[nuevoIdioma] ? nuevoIdioma : "es";
   guardarAlmacen(CLAVE_IDIOMA, idioma);
   document.documentElement.lang = idioma;
+  const textoTema = idioma === "en"
+    ? (tema === "dark" ? "Switch to light mode" : "Switch to dark mode")
+    : (tema === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro");
+  if (themeToggleLabel) themeToggleLabel.textContent = textoTema;
+  if (themeToggle) themeToggle.setAttribute("aria-label", textoTema);
 
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const clave = el.getAttribute("data-i18n");
@@ -1615,9 +1641,25 @@ function aplicarIdioma(nuevoIdioma) {
   if (!lector.hidden) avisarTemaAlFrame();
 }
 
+function aplicarTema(nuevoTema, guardar = true) {
+  tema = nuevoTema === "dark" ? "dark" : "light";
+  document.documentElement.dataset.theme = tema;
+  document.documentElement.style.colorScheme = tema;
+  if (guardar) guardarAlmacen(CLAVE_TEMA, tema);
+  const texto = tema === "dark" ? t("themeToLight") : t("themeToDark");
+  if (themeToggleLabel) themeToggleLabel.textContent = texto;
+  if (themeToggle) {
+    themeToggle.setAttribute("aria-label", texto);
+    themeToggle.setAttribute("aria-pressed", String(tema === "dark"));
+    const icono = themeToggle.querySelector(".tema-control__icono");
+    if (icono) icono.textContent = tema === "dark" ? "☀" : "☾";
+  }
+  if (!lector.hidden) avisarTemaAlFrame();
+}
+
 function avisarTemaAlFrame() {
   if (lectorFrame.contentWindow) {
-    lectorFrame.contentWindow.postMessage({ tipo: "ovaTema", tema: "dark" }, "*");
+    lectorFrame.contentWindow.postMessage({ tipo: "ovaTema", tema }, "*");
     lectorFrame.contentWindow.postMessage({ tipo: "ovaIdioma", idioma }, "*");
     lectorFrame.contentWindow.postMessage(
       { tipo: "ovaEstudiante", nombre: nombreEstudiante(), invitado: Boolean(estudiante && estudiante.invitado) },
@@ -1651,6 +1693,8 @@ botonesIdioma.forEach((boton) => {
     if (seleccionado !== idioma) aplicarIdioma(seleccionado);
   });
 });
+
+themeToggle?.addEventListener("click", () => aplicarTema(tema === "dark" ? "light" : "dark"));
 
 accionGlobal.addEventListener("click", abrirResumen);
 
@@ -1716,11 +1760,8 @@ document.addEventListener("keydown", (e) => {
   if (!lector.hidden) cerrarLector();
 });
 
-try {
-  localStorage.setItem("ovaTema", "dark");
-} catch (e) {}
-
 document.getElementById("anio").textContent = new Date().getFullYear();
 
+aplicarTema(tema, false);
 aplicarIdioma(idioma);
 if (!estudiante) abrirBienvenida("inicio");

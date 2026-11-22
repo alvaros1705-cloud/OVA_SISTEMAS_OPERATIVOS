@@ -3,205 +3,257 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OVA · CORE — Corte 01: Máquinas, kernel y archivos</title>
+  <meta name="theme-color" content="#09843B">
+  <meta name="description" content="Objeto Virtual de Aprendizaje de Sistemas Operativos. Ingeniería de Sistemas, Universidad Simón Bolívar.">
+  <title>Sistemas Operativos | OVA · Universidad Simón Bolívar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/estilos.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portal.css">
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-  <header class="navbar">
-    <div class="navbar__inner">
-      <a class="marca" href="#" id="marca">
-        <span class="marca__icono">
-          <span class="marca__icono-inner">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="7" y="7" width="10" height="10" rx="2"/>
-              <rect x="10" y="10" width="4" height="4" rx="1"/>
-              <path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4"/>
-            </svg>
-          </span>
-        </span>
-        <span class="marca__texto">
-          <strong>OVA <span class="marca__punto">•</span> CORE</strong>
-          <small data-i18n="brandSubtitle">kernel_learning // universidad simón bolívar</small>
-        </span>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#inicio" aria-label="Sistemas Operativos, ir al inicio">
+        <span class="brand-logo-plate"><img src="recursos%20visuales/20231121155455_0.png" alt="Universidad Simón Bolívar"></span>
+        <span class="brand-divider" aria-hidden="true"></span>
+        <span class="brand-course">OBJETO VIRTUAL DE APRENDIZAJE<strong>Sistemas Operativos</strong></span>
       </a>
-
-      <div class="navbar__acciones">
-        <button class="estudiante" type="button" id="estudianteBoton" hidden>
-          <span class="estudiante__etiqueta" data-i18n="estudianteLabel">ESTUDIANTE</span>
-          <span class="estudiante__nombre" id="estudianteNombre"></span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
+        <a href="#inicio" class="active">Inicio</a>
+        <a href="#introduccion">Introducción</a>
+        <a href="#objetivos">Objetivos</a>
+        <a href="#plan">Plan semanal</a>
+        <a href="#unidades">Unidades</a>
+        <a href="#laboratorios">Simuladores</a>
+      </nav>
+      <div class="preference-controls" aria-label="Preferencias de visualización">
+        <div class="language-switch" role="group" aria-label="Language / Idioma">
+          <button type="button" class="language-button is-active" data-portal-lang="es" aria-pressed="true" lang="es">ES</button>
+          <button type="button" class="language-button" data-portal-lang="en" aria-pressed="false" lang="en">EN</button>
+        </div>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar a modo oscuro" aria-pressed="false">
+          <span class="theme-toggle-icon" aria-hidden="true">☾</span><span id="themeToggleLabel">Modo oscuro</span>
         </button>
-
-        <div class="idioma" role="group" aria-label="Selector de idioma">
-          <button class="idioma__opcion activo" type="button" data-lang="es" aria-pressed="true">ES</button>
-          <button class="idioma__opcion" type="button" data-lang="en" aria-pressed="false">EN</button>
-        </div>
-
-        <div class="progreso-global">
-          <span class="progreso-global__etiqueta" data-i18n="globalProgress">PROGRESO GLOBAL</span>
-          <div class="progreso-global__fila">
-            <div class="barra barra--mini">
-              <span id="barraGlobal"></span>
-            </div>
-            <span class="progreso-global__pct" id="pctGlobal">0%</span>
-            <span class="badge-estado" id="badgeGlobal" data-i18n="inProgress">EN CURSO</span>
-            <button class="boton-circular" type="button" id="accionGlobal" aria-label="Ir a las preguntas">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </button>
-          </div>
-        </div>
+      </div>
+      <div class="social-links" aria-label="Redes institucionales">
+        <span class="social-placeholder" title="Enlace de Facebook pendiente" aria-label="Facebook: enlace pendiente">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1v-2c0-.9.3-1.5 1.6-1.5h1.7V3.6c-.3 0-1.3-.1-2.4-.1-2.4 0-4.1 1.5-4.1 4.2v2.3H7.6V13h2.7v8h3.2Z"/></svg>
+        </span>
+        <span class="social-placeholder" title="Enlace de Instagram pendiente" aria-label="Instagram: enlace pendiente">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.8" r="1" class="solid"/></svg>
+        </span>
       </div>
     </div>
+    <div class="institution-stripe" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
   </header>
 
-  <main class="dashboard">
-
-    <aside class="sidebar">
-      <div class="panel ruta">
-        <div class="ruta__cabecera">
-          <span class="etiqueta-mono" data-i18n="learningPath">RUTA DE APRENDIZAJE</span>
-          <span class="ruta__contador" id="rutaContador">01 / 03</span>
+  <main id="contenido">
+    <section class="hero" id="inicio" aria-labelledby="heroTitle">
+      <div class="hero-pattern" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-dot"></span> INGENIERÍA DE SISTEMAS · VI SEMESTRE</p>
+          <h1 id="heroTitle">Sistemas<br><em>Operativos</em></h1>
+          <p class="hero-lead">Explora cómo el sistema operativo administra los recursos del computador, coordina la ejecución de programas y proporciona los servicios esenciales para construir soluciones tecnológicas seguras y eficientes.</p>
+          <div class="hero-actions">
+            <a class="btn btn-light" href="aula.html?unidad=0">Ingresar al OVA <span aria-hidden="true">→</span></a>
+            <a class="btn btn-outline" href="#unidades">Explorar las unidades</a>
+          </div>
+          <div class="hero-meta">
+            <span><strong>03</strong> unidades de aprendizaje</span>
+            <span><strong>16</strong> semanas académicas</span>
+            <span><strong>144</strong> horas de trabajo académico</span>
+          </div>
         </div>
-
-        <nav class="ruta__lista" id="rutaLista" aria-label="Ruta de aprendizaje"></nav>
+        <div class="hero-visual" aria-label="Ilustración de una arquitectura de sistema operativo">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="chip-card">
+            <div class="chip-top"><span>UNISIMÓN · OS LAB</span><span class="chip-live"><i></i> ONLINE</span></div>
+            <svg class="cpu-art" viewBox="0 0 420 320" role="img" aria-label="Procesador conectado con memoria, procesos y dispositivos">
+              <defs>
+                <linearGradient id="cpuGrad" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a9efc3"/><stop offset="1" stop-color="#22a75c"/></linearGradient>
+                <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              </defs>
+              <g fill="none" stroke="#6bdb9a" stroke-width="2" opacity=".72">
+                <path d="M210 132V62H105V38M210 132V55H314V34M210 212v52H105v20M210 212v54h105v22"/>
+                <path d="M135 157H64v-48H36M285 157h72v-48h27M135 190H70v53H38M285 190h64v53h34"/>
+                <circle cx="105" cy="38" r="5" fill="#a9efc3"/><circle cx="314" cy="34" r="5" fill="#a9efc3"/><circle cx="105" cy="280" r="5" fill="#a9efc3"/><circle cx="315" cy="286" r="5" fill="#a9efc3"/>
+                <circle cx="36" cy="109" r="5" fill="#a9efc3"/><circle cx="384" cy="109" r="5" fill="#a9efc3"/><circle cx="38" cy="243" r="5" fill="#a9efc3"/><circle cx="383" cy="243" r="5" fill="#a9efc3"/>
+              </g>
+              <g filter="url(#glow)"><rect x="134" y="112" width="152" height="120" rx="18" fill="#073d27" stroke="url(#cpuGrad)" stroke-width="4"/><rect x="157" y="136" width="106" height="72" rx="10" fill="#0c5c36" stroke="#a9efc3" stroke-width="2"/><path d="M181 159h18l-18 26h18M225 159h15l-15 26h15" stroke="#e4ffec" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M134 141h-12m12 25h-12m12 25h-12m164-50h12m-12 25h12m-12 25h12M165 112v-12m28 12v-12m28 12v-12m28 12v-12M165 232v12m28-12v12m28-12v12m28-12v12" stroke="#a9efc3" stroke-width="3" stroke-linecap="round"/></g>
+              <g fill="#e8fff0" font-family="Inter, sans-serif" font-size="11" font-weight="700"><text x="20" y="93">I/O</text><text x="354" y="93">CPU</text><text x="68" y="23">MEMORIA</text><text x="284" y="19">KERNEL</text><text x="70" y="306">PROCESOS</text><text x="282" y="310">ARCHIVOS</text></g>
+            </svg>
+            <div class="chip-bottom"><span>kernel / memory / processes / I-O</span><span class="chip-progress"><i></i><i></i><i></i><i></i><i></i></span></div>
+          </div>
+          <div class="floating-note note-a"><span class="note-icon">01</span><span>Gestión de procesos</span></div>
+          <div class="floating-note note-b"><span class="note-icon">02</span><span>Memoria y almacenamiento</span></div>
+        </div>
       </div>
-
-      <div class="terminal">
-        <div class="terminal__barra">
-          <span class="terminal__punto"></span>
-          <span class="terminal__nombre">stdout</span>
-        </div>
-          <p class="terminal__linea"><span id="terminalComando">$ kernel_init --module=maquinas_virtuales</span><span class="terminal__cursor"></span></p>
-      </div>
-    </aside>
-
-    <section class="panel contenido">
-      <span class="badge-paso" id="badgePaso">CORTE 01 · MÁQUINAS VIRTUALES · KERNEL · ARCHIVOS</span>
-
-      <h1 class="contenido__titulo" id="tituloModulo">Máquinas, kernel y archivos</h1>
-
-      <p class="contenido__desc" id="descripcion"></p>
-
-      <div class="activos" id="activos"></div>
-
-      <div class="caja-progreso">
-        <div class="caja-progreso__fila">
-          <span class="etiqueta-mono dim" data-i18n="moduleProgress">PROGRESO DEL MÓDULO</span>
-          <span class="contador" id="contadorRespondidas">Respondidas: 0 de 10</span>
-        </div>
-        <div class="barra">
-          <span id="barraModulo"></span>
-        </div>
-      </div>
-
-      <hr class="divisor">
-
-      <div class="preguntas" id="preguntas"></div>
-
+      <a class="hero-scroll" href="#introduccion" aria-label="Desplazarse a la introducción"><span></span></a>
     </section>
 
+    <section class="course-facts" aria-label="Información del curso">
+      <div class="fact"><span class="fact-label">CÓDIGO</span><strong>9893</strong></div>
+      <div class="fact"><span class="fact-label">CRÉDITOS</span><strong>3</strong></div>
+      <div class="fact"><span class="fact-label">SEMESTRE</span><strong>VI</strong></div>
+      <div class="fact"><span class="fact-label">MODALIDAD</span><strong>Presencial</strong></div>
+      <div class="fact"><span class="fact-label">TRABAJO ACADÉMICO</span><strong>144 horas</strong></div>
+    </section>
+
+    <section class="section section-intro" id="introduccion">
+      <div class="section-kicker">01 · CONTEXTO DEL CURSO</div>
+      <div class="intro-grid">
+        <div>
+          <h2>Comprender el sistema que hace posible la computación.</h2>
+          <p class="section-lead">Los sistemas operativos administran los recursos físicos del computador y coordinan los recursos lógicos —software e información— sobre los que trabajan las organizaciones.</p>
+        </div>
+        <div class="intro-copy">
+          <p>Para el ingeniero de sistemas, comprender cómo se gestionan los recursos del computador es fundamental al evaluar, seleccionar, instalar, configurar y administrar soluciones informáticas.</p>
+          <p>Este OVA reúne contenidos, actividades prácticas y recursos interactivos para recorrer los principales mecanismos internos de un sistema operativo, desde el arranque y los procesos hasta la memoria, los archivos, la entrada/salida y la seguridad.</p>
+        </div>
+      </div>
+      <div class="purpose-grid">
+        <article class="purpose-card purpose-course">
+          <span class="card-overline">PROPÓSITO DEL CURSO · PAC</span>
+          <h3>Formación profesional crítica, integradora y ética</h3>
+          <p>Formar profesionales con capacidad para gestionar y evaluar las tecnologías de la información en contextos multidisciplinarios y multiculturales con criterios de sostenibilidad y responsabilidad social, desarrollando el saber ser, saber conocer y saber hacer.</p>
+        </article>
+        <article class="purpose-card purpose-ova">
+          <span class="card-overline">PROPÓSITO DE ESTE OVA</span>
+          <h3>Aprender, practicar y relacionar los componentes</h3>
+          <p>Ofrecer una ruta digital de aprendizaje en la que el estudiante identifique tecnologías de sistemas operativos, comprenda la interacción entre sus componentes físicos y lógicos y practique mediante contenidos, talleres, juegos y laboratorios interactivos.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section objectives-section" id="objetivos">
+      <div class="section-heading">
+        <div><div class="section-kicker">02 · RESULTADOS DE APRENDIZAJE</div><h2>Objetivos de aprendizaje</h2></div>
+        <p>Organizados a partir de los saberes y resultados específicos establecidos en el PAC del curso.</p>
+      </div>
+      <div class="objective-grid">
+        <article class="objective-card"><span class="objective-number">01</span><div class="objective-icon">⌘</div><h3>Saber conocer</h3><p>Identificar las tecnologías relacionadas con los sistemas operativos de los computadores y reconocer los componentes físicos y lógicos que intervienen en la ejecución de programas.</p><span class="objective-tag">Identificar · Reconocer</span></article>
+        <article class="objective-card"><span class="objective-number">02</span><div class="objective-icon">⚙</div><h3>Saber hacer</h3><p>Comprender los componentes de los sistemas operativos y la forma como interactúan durante la ejecución de programas, para proponer un uso adecuado de la tecnología en desarrollos tecnológicos.</p><span class="objective-tag">Comprender · Proponer</span></article>
+        <article class="objective-card"><span class="objective-number">03</span><div class="objective-icon">◇</div><h3>Saber ser</h3><p>Argumentar de forma crítica y objetiva sobre las tecnologías relacionadas con la arquitectura del computador, considerando sus bondades y problemáticas, así como sus impactos.</p><span class="objective-tag">Analizar · Argumentar</span></article>
+      </div>
+      <div class="competency-band"><span class="competency-mark">TI</span><div><span class="card-overline">COMPETENCIA PROFESIONAL</span><h3>Gestión de Tecnologías de la Información</h3><p>Promover el uso estratégico y eficiente de las tecnologías de información, garantizando seguridad, disponibilidad y confiabilidad.</p></div></div>
+    </section>
+
+    <section class="section learning-section" id="unidades">
+      <div class="section-heading">
+        <div><div class="section-kicker">03 · RUTA DE APRENDIZAJE</div><h2>Tres unidades, un recorrido integrado.</h2></div>
+        <p>Los temas se organizan en tres bloques de aprendizaje. Cada unidad conserva los recursos y las actividades desarrolladas para ella.</p>
+      </div>
+      <div class="units-grid">
+        <article class="unit-card unit-blue">
+          <div class="unit-top"><span class="unit-index">UNIDAD 01</span><span class="unit-symbol">01</span></div>
+          <h3>Fundamentos del sistema operativo</h3>
+          <p>Reconoce los conceptos base, el arranque, los sistemas de archivos y los procesos.</p>
+          <ul><li>Máquinas virtuales</li><li>Kernel y booting</li><li>Sistemas de archivos</li><li>Procesos</li></ul>
+          <div class="unit-bottom"><span>5 temas y actividades</span><a href="aula.html?unidad=0" class="unit-link">Explorar unidad <b>→</b></a></div>
+        </article>
+        <article class="unit-card unit-yellow">
+          <div class="unit-top"><span class="unit-index">UNIDAD 02</span><span class="unit-symbol">02</span></div>
+          <h3>Procesos, concurrencia y memoria</h3>
+          <p>Estudia la planificación, la comunicación entre procesos, los hilos y la administración de memoria.</p>
+          <ul><li>Planificación de procesos</li><li>Sistemas distribuidos, sockets e hilos</li><li>Concurrencia de procesos</li><li>Memoria</li></ul>
+          <div class="unit-bottom"><span>5 temas y actividades</span><a href="aula.html?unidad=1" class="unit-link">Explorar unidad <b>→</b></a></div>
+        </article>
+        <article class="unit-card unit-rose">
+          <div class="unit-top"><span class="unit-index">UNIDAD 03</span><span class="unit-symbol">03</span></div>
+          <h3>Memoria avanzada y servicios del sistema</h3>
+          <p>Profundiza en memoria virtual, entrada/salida, seguridad y sistemas con requisitos temporales.</p>
+          <ul><li>Memoria virtual</li><li>Entrada / Salida (E/S)</li><li>Seguridad</li><li>Tiempo real, sistemas embebidos y tolerancia a fallos</li></ul>
+          <div class="unit-bottom"><span>6 temas y evaluación</span><a href="aula.html?unidad=2" class="unit-link">Explorar unidad <b>→</b></a></div>
+        </article>
+      </div>
+      <div class="classroom-cta"><div><span class="card-overline">AULA INTERACTIVA · OVA CORE</span><h3>Continúa tu recorrido de aprendizaje</h3><p>Accede a los contenidos, talleres, juegos y cuestionarios que acompañan las tres unidades.</p></div><a class="btn btn-green" href="aula.html">Entrar al aula <span aria-hidden="true">→</span></a></div>
+    </section>
+
+    <section class="section plan-section" id="plan">
+      <div class="section-heading">
+        <div><div class="section-kicker">04 · ORGANIZACIÓN ACADÉMICA</div><h2>Plan de actividades semanal</h2></div>
+        <p>Secuencia de 16 semanas tomada del apartado 14 del PAC. Cada semana contempla 6 horas de clase práctica en laboratorios.</p>
+      </div>
+      <div class="plan-legend"><span><i class="legend-blue"></i> Unidad 1</span><span><i class="legend-yellow"></i> Unidad 2</span><span><i class="legend-rose"></i> Unidad 3</span><span><i class="legend-neutral"></i> Inicio / cierre</span></div>
+      <div class="weeks-grid">
+        <article class="week-card week-neutral"><span class="week-number">SEMANA <b>01</b></span><h3>Introducción</h3><div class="week-meta"><span>6 horas</span><span>Clase práctica</span></div><small>Laboratorios</small></article>
+        <article class="week-card week-blue"><span class="week-number">SEMANA <b>02</b></span><h3>Máquinas virtuales</h3><div class="week-meta"><span>6 horas</span><span>Clase práctica</span></div><small>Laboratorios</small></article>
+        <article class="week-card week-blue"><span class="week-number">SEMANA <b>03</b></span><h3>Kernel y booting</h3><div class="week-meta"><span>6 horas</span><span>Clase práctica</span></div><small>Laboratorios</small></article>
+        <article class="week-card week-blue"><span class="week-number">SEMANA <b>04</b></span><h3>Sistemas de archivos</h3><div class="week-meta"><span>6 horas</span><span>Clase práctica</span></div><small>Laboratorios</small></article>
+        <article class="week-card week-blue"><span class="week-number">SEMANA <b>05</b></span><h3>Procesos</h3><div class="week-meta"><span>6 horas</span><span>Clase práctica</span></div><small>Laboratorios</small></article>
+        <article class="week-card week-blue week-assessment"><span class="week-number">SEMANA <b>06</b></span><h3>Examen</h3><div class="week-meta"><span>6 horas</span><span>Clase práctica</span></div><small>Laboratorios · Cierre unidad 1</small></article>
+        <article class="week-card week-yellow"><span class="week-number">SEMANA <b>07</b></span><h3>Planificación de procesos</h3><div class="week-meta"><span>6 horas</span><span>Clase práctica</span></div><small>Laboratorios</small></article>
+        <article class="week-card week-yellow"><span class="week-number">SEMANA <b>08</b></span><h3>Sistemas distribuidos, sockets e hilos</h3><div class="week-meta"><span>6 horas</span><span>Clase práctica</span></div><small>Laboratorios</small></article>
+        <article class="week-card week-yellow"><span class="week-number">SEMANA <b>09</b></span><h3>Concurrencia de procesos</h3><div class="week-meta"><span>6 horas</span><span>Clase práctica</span></div><small>Laboratorios</small></article>
+        <article class="week-card week-yellow"><span class="week-number">SEMANA <b>10</b></span><h3>Memoria</h3><div class="week-meta"><span>6 horas</span><span>Clase práctica</span></div><small>Laboratorios</small></article>
+        <article class="week-card week-rose"><span class="week-number">SEMANA <b>11</b></span><h3>Memoria virtual</h3><div class="week-meta"><span>6 horas</span><span>Clase práctica</span></div><small>Laboratorios</small></article>
+        <article class="week-card week-rose week-assessment"><span class="week-number">SEMANA <b>12</b></span><h3>Examen</h3><div class="week-meta"><span>6 horas</span><span>Clase práctica</span></div><small>Laboratorios · Evaluación programada</small></article>
+        <article class="week-card week-rose"><span class="week-number">SEMANA <b>13</b></span><h3>Entrada / Salida (E/S)</h3><div class="week-meta"><span>6 horas</span><span>Clase práctica</span></div><small>Laboratorios</small></article>
+        <article class="week-card week-rose"><span class="week-number">SEMANA <b>14</b></span><h3>Seguridad</h3><div class="week-meta"><span>6 horas</span><span>Clase práctica</span></div><small>Laboratorios</small></article>
+        <article class="week-card week-rose"><span class="week-number">SEMANA <b>15</b></span><h3>Tiempo real, sistemas embebidos y tolerancia a fallos</h3><div class="week-meta"><span>6 horas</span><span>Clase práctica</span></div><small>Laboratorios</small></article>
+        <article class="week-card week-neutral week-final"><span class="week-number">SEMANA <b>16</b></span><h3>Evaluación final</h3><div class="week-meta"><span>6 horas</span><span>Clase práctica</span></div><small>Laboratorios · Cierre del curso</small></article>
+      </div>
+      <p class="plan-note"><strong>Nota:</strong> la distribución semanal reproduce la secuencia del PAC. La clasificación visual por unidades sigue los tres bloques de integración definidos para este OVA.</p>
+    </section>
+
+    <section class="method-band">
+      <div class="method-content"><div class="section-kicker">05 · METODOLOGÍA DE APRENDIZAJE</div><h2>De los conceptos a la experimentación.</h2><p>El curso combina diagnóstico de saberes previos, búsqueda y consulta de información, exposiciones como trabajo independiente y talleres prácticos de simulación de proyectos.</p></div>
+      <div class="method-steps"><div><b>01</b><span>Explora y consulta</span></div><div><b>02</b><span>Comprende los conceptos</span></div><div><b>03</b><span>Practica en laboratorios</span></div><div><b>04</b><span>Argumenta y evalúa</span></div></div>
+    </section>
+
+    <section class="section simulator-section" id="laboratorios">
+      <div class="section-heading">
+        <div><div class="section-kicker">06 · EXPERIMENTACIÓN</div><h2>Laboratorio de simuladores</h2></div>
+        <p>Un espacio central para reunir los simuladores y laboratorios interactivos desarrollados por los estudiantes.</p>
+      </div>
+      <div class="simulator-layout">
+        <div class="simulator-feature">
+          <div class="simulator-icon">⌘</div>
+          <span class="card-overline">ESPACIO DE INTEGRACIÓN</span>
+          <h3>Experimenta con los sistemas operativos</h3>
+          <p>Los simuladores adicionales se incorporarán cuando se reciban sus versiones completas. Se respetará el diseño, los controles y la experiencia de cada laboratorio, integrándolos desde este punto de acceso.</p>
+          <span class="integration-status"><i></i> Sección preparada para integración</span>
+        </div>
+        <div class="simulator-side">
+          <article class="simulator-mini"><span class="mini-symbol">01</span><div><h4>Laboratorios incluidos en las unidades</h4><p>Algunos recursos interactivos ya están integrados en los OVA de los cortes.</p><a href="aula.html?unidad=1">Abrir unidad 2 →</a></div></article>
+          <article class="simulator-mini"><span class="mini-symbol">02</span><div><h4>Simulador de sistemas de archivos</h4><p>El OVA de sistemas de archivos contiene un simulador de asignación de bloques, inodos y desfragmentación.</p><a href="temas/tema3/index.html#mod5">Abrir simulador →</a></div></article>
+          <article class="simulator-mini simulator-pending"><span class="mini-symbol">03</span><div><h4>Simuladores del examen final</h4><p>Acceso centralizado pendiente de recibir los archivos finales de los estudiantes.</p><span class="pending-label">Pendiente de recepción</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing-callout">
+      <div><span class="card-overline">SISTEMAS OPERATIVOS · INGENIERÍA DE SISTEMAS</span><h2>Conoce el sistema. Comprende sus procesos. Experimenta.</h2><p>Inicia el recorrido por las unidades de aprendizaje y utiliza los recursos interactivos para reforzar los conceptos.</p></div>
+      <a class="btn btn-light" href="aula.html">Ingresar al aula <span aria-hidden="true">→</span></a>
+    </section>
   </main>
 
-  <footer class="pie">
-    <span>kernel_ova</span>
-    <span class="pie__punto"></span>
-    <span>OVA grupal &middot; <span id="anio"></span></span>
+  <footer class="site-footer" id="desarrolladores">
+    <div class="footer-stripe" aria-hidden="true"></div>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <span class="footer-logo-plate"><img src="recursos%20visuales/20231121155455_0.png" alt="Universidad Simón Bolívar" class="footer-usb"></span>
+        <div class="footer-course-name"><span class="footer-overline">OBJETO VIRTUAL DE APRENDIZAJE</span><h2>Sistemas<br>Operativos</h2></div>
+        <p>Objeto Virtual de Aprendizaje · Programa de Ingeniería de Sistemas · Universidad Simón Bolívar.</p>
+        <div class="footer-program"><img src="recursos%20visuales/logo-sistemas.png" alt="Identidad gráfica del programa de Sistemas"/><span>INGENIERÍA DE SISTEMAS</span></div>
+      </div>
+      <div class="footer-column"><h3>NAVEGACIÓN</h3><a href="#inicio">Inicio</a><a href="#introduccion">Introducción</a><a href="#objetivos">Objetivos</a><a href="#plan">Plan semanal</a><a href="#unidades">Unidades de aprendizaje</a><a href="#laboratorios">Laboratorio de simuladores</a></div>
+      <div class="footer-column"><h3>RECURSOS</h3><a href="aula.html?unidad=0">Unidad 1 · Fundamentos</a><a href="aula.html?unidad=1">Unidad 2 · Procesos y memoria</a><a href="aula.html?unidad=2">Unidad 3 · Servicios avanzados</a><a href="temas/tema3/index.html#mod5">Simulador de archivos</a></div>
+      <div class="footer-developers"><h3>DESARROLLADORES</h3>
+        <details><summary>Unidad 1 · Fundamentos</summary><ul><li><b>Máquinas virtuales:</b> ALVARADO PEÑALOZA EDER SAHID</li><li><b>Kernel y booting:</b> ARENAS CRUZ KAROL DAYANA</li><li><b>Sistemas de archivos:</b> DAZA JAIMES ANDERSON FABIAN</li><li><b>Procesos:</b> GAMBOA PINO CARLOS DAVID</li><li><b>Talleres y juegos:</b> GUEVARA DONADO ALEJANDRO</li></ul></details>
+        <details><summary>Unidad 2 · Procesos y memoria</summary><ul><li><b>Planificación:</b> IBARRA CASADIEGO BRAHIAN JOSE DAVID</li><li><b>Sistemas distribuidos, sockets e hilos:</b> JAIMES ORTEGA DYLAN ALFRETH</li><li><b>Concurrencia:</b> LARGO SANJUAN YOJAN STEVEN</li><li><b>Memoria:</b> LUNA QUINTERO MARIA JOSE</li><li><b>Talleres y juegos:</b> MARTINEZ DAVILA JEAN CARLOS</li></ul></details>
+        <details><summary>Unidad 3 · Memoria y servicios</summary><ul><li><b>Memoria virtual:</b> MEDINA PEÑA JESUS ABEL</li><li><b>Entrada / Salida:</b> MONSALVE CABALLERO TOMAS MATEO</li><li><b>Seguridad:</b> OSORIO VILLAMIZAR ALEJANDRO</li><li><b>Tiempo real, sistemas embebidos y tolerancia a fallos:</b> RODRÍGUEZ SÁNCHEZ ANDREA XIOMARA</li><li><b>Talleres y juegos:</b> SANDOVAL PIÑEROS IMANOL SANTIAGO</li><li><b>Quices y evaluación final:</b> SERRANO ANAYA JESUS DAVID</li></ul></details>
+      </div>
+    </div>
+    <div class="footer-bottom"><span>Universidad Simón Bolívar · Ingeniería de Sistemas</span><span>OVA de Sistemas Operativos</span><span>© <span id="year"></span></span></div>
   </footer>
-
-  <section class="lector" id="lector" hidden role="dialog" aria-modal="true" aria-label="Lector de OVA">
-    <div class="lector__caja">
-      <div class="lector__barra">
-        <div class="lector__info">
-          <span class="etiqueta-mono dim" data-i18n="readerLabel">OVA :: LECTURA</span>
-          <h2 id="lectorTitulo"></h2>
-        </div>
-        <button class="boton-cerrar" type="button" id="lectorCerrar">
-          <span data-i18n="closeLabel">Cerrar</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-        </button>
-      </div>
-      <iframe id="lectorFrame" class="lector__frame" title="Objeto Virtual de Aprendizaje" loading="lazy"></iframe>
-    </div>
-  </section>
-
-  <section class="modal-sistema" id="bienvenida" hidden role="dialog" aria-modal="true" aria-labelledby="bienvenidaTitulo">
-    <div class="modal-sistema__caja modal-sistema__caja--bienvenida">
-      <div class="modal-sistema__barra">
-        <span class="modal-sistema__punto"></span>
-        <span class="modal-sistema__nombre">boot_ova_core</span>
-        <span class="modal-sistema__prompt">OVA · CORE</span>
-      </div>
-
-      <div class="modal-sistema__cuerpo">
-        <div class="bienvenida__marca">
-          <span class="bienvenida__icono" aria-hidden="true">US</span>
-          <div>
-            <span class="etiqueta-mono cian">BOOT_SEQUENCE :: 001</span>
-            <h2 id="bienvenidaTitulo" data-i18n="bienvenidaTitulo">Inicializando tu espacio de aprendizaje</h2>
-            <p data-i18n="bienvenidaInstitucion">Ingeniería de Sistemas · Universidad Simón Bolívar</p>
-          </div>
-        </div>
-
-        <p class="bienvenida__descripcion" data-i18n="bienvenidaDescripcion">boot_ova_core preparó un recorrido con 3 Cortes, OVAs interactivos, talleres/juegos y evaluación final. Ingresa tu nombre para personalizar la sesión.</p>
-
-        <ul class="bienvenida__lista">
-          <li><span>01</span><span data-i18n="bienvenidaCortes">3 Cortes con rutas y cuestionarios</span></li>
-          <li><span>02</span><span data-i18n="bienvenidaOvas">OVAs interactivos por tema</span></li>
-          <li><span>03</span><span data-i18n="bienvenidaTalleres">Talleres y juegos integrados</span></li>
-          <li><span>04</span><span data-i18n="bienvenidaEvaluacion">Evaluación y progreso global</span></li>
-        </ul>
-
-        <form class="bienvenida__formulario" id="bienvenidaForm">
-          <label for="estudianteInput" data-i18n="nombreEstudiante">Nombre del estudiante</label>
-          <input type="text" id="estudianteInput" name="estudiante" autocomplete="name" maxlength="80" placeholder="Escribe tu nombre completo" required>
-          <div class="bienvenida__acciones">
-            <button class="boton-primario" type="submit" id="bienvenidaGuardar" data-i18n="iniciarSesion">Iniciar sesión</button>
-            <button class="boton-secundario" type="button" id="invitadoBoton" data-i18n="explorarInvitado">Explorar como invitado</button>
-          </div>
-        </form>
-
-        <p class="modal-sistema__nota">LOCAL SESSION :: <span data-i18n="estudianteLabel">ESTUDIANTE</span></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="modal-sistema" id="resumen" hidden role="dialog" aria-modal="true" aria-labelledby="resumenTitulo">
-    <div class="modal-sistema__caja modal-sistema__caja--resumen">
-      <div class="modal-sistema__barra">
-        <span class="modal-sistema__punto"></span>
-        <span class="modal-sistema__nombre">kernel_report</span>
-        <button class="modal-sistema__cerrar" type="button" id="resumenCerrar">
-          <span data-i18n="closeLabel">Cerrar</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-        </button>
-      </div>
-
-      <div class="modal-sistema__cuerpo">
-        <span class="etiqueta-mono cian" data-i18n="resumenSubtitulo">kernel_report // desempeño por corte</span>
-        <h2 id="resumenTitulo" data-i18n="resumenTitulo">Resumen global</h2>
-
-        <div class="resumen__global">
-          <div class="resumen__global-cabecera">
-            <span class="etiqueta-mono dim" data-i18n="rendimientoGlobal">RENDIMIENTO GLOBAL</span>
-            <strong id="resumenPct">0%</strong>
-          </div>
-          <div class="barra"><span id="resumenBarra"></span></div>
-          <p id="resumenDetalle"></p>
-        </div>
-
-        <div class="resumen__cortes" id="resumenCortes"></div>
-
-        <div class="resumen__acciones">
-          <button class="boton-peligro" type="button" id="reiniciarProgreso" data-i18n="reiniciarProgreso">Reiniciar progreso</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <script src="js/app.js"></script>
+  <script src="portal.js"></script>
 </body>
 </html>

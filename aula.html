@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OVA · CORE — Corte 01: Máquinas, kernel y archivos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar__inner">
+      <a class="marca" href="#" id="marca">
+        <span class="marca__icono">
+          <span class="marca__icono-inner">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="7" y="7" width="10" height="10" rx="2"/>
+              <rect x="10" y="10" width="4" height="4" rx="1"/>
+              <path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4"/>
+            </svg>
+          </span>
+        </span>
+        <span class="marca__texto">
+          <strong>OVA <span class="marca__punto">•</span> CORE</strong>
+          <small data-i18n="brandSubtitle">kernel_learning // universidad simón bolívar</small>
+        </span>
+      </a>
+
+      <a class="volver-portal" href="index.html" aria-label="Volver al portal institucional">
+        <span aria-hidden="true">←</span> Portal institucional
+      </a>
+
+      <div class="navbar__acciones">
+        <button class="estudiante" type="button" id="estudianteBoton" hidden>
+          <span class="estudiante__etiqueta" data-i18n="estudianteLabel">ESTUDIANTE</span>
+          <span class="estudiante__nombre" id="estudianteNombre"></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        </button>
+
+        <button class="tema-control" type="button" id="themeToggle" aria-label="Cambiar a modo oscuro" aria-pressed="false">
+          <span class="tema-control__icono" aria-hidden="true">☾</span><span id="themeToggleLabel">Modo oscuro</span>
+        </button>
+        <div class="idioma" role="group" aria-label="Language / Idioma">
+          <button class="idioma__opcion activo" type="button" data-lang="es" aria-pressed="true">ES</button>
+          <button class="idioma__opcion" type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+
+        <div class="progreso-global">
+          <span class="progreso-global__etiqueta" data-i18n="globalProgress">PROGRESO GLOBAL</span>
+          <div class="progreso-global__fila">
+            <div class="barra barra--mini">
+              <span id="barraGlobal"></span>
+            </div>
+            <span class="progreso-global__pct" id="pctGlobal">0%</span>
+            <span class="badge-estado" id="badgeGlobal" data-i18n="inProgress">EN CURSO</span>
+            <button class="boton-circular" type="button" id="accionGlobal" aria-label="Ir a las preguntas">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="dashboard">
+
+    <aside class="sidebar">
+      <div class="panel ruta">
+        <div class="ruta__cabecera">
+          <span class="etiqueta-mono" data-i18n="learningPath">RUTA DE APRENDIZAJE</span>
+          <span class="ruta__contador" id="rutaContador">01 / 03</span>
+        </div>
+
+        <nav class="ruta__lista" id="rutaLista" aria-label="Ruta de aprendizaje"></nav>
+      </div>
+
+      <div class="terminal">
+        <div class="terminal__barra">
+          <span class="terminal__punto"></span>
+          <span class="terminal__nombre">stdout</span>
+        </div>
+          <p class="terminal__linea"><span id="terminalComando">$ kernel_init --module=maquinas_virtuales</span><span class="terminal__cursor"></span></p>
+      </div>
+    </aside>
+
+    <section class="panel contenido">
+      <span class="badge-paso" id="badgePaso">CORTE 01 · MÁQUINAS VIRTUALES · KERNEL · ARCHIVOS</span>
+
+      <h1 class="contenido__titulo" id="tituloModulo">Máquinas, kernel y archivos</h1>
+
+      <p class="contenido__desc" id="descripcion"></p>
+
+      <div class="activos" id="activos"></div>
+
+      <div class="caja-progreso">
+        <div class="caja-progreso__fila">
+          <span class="etiqueta-mono dim" data-i18n="moduleProgress">PROGRESO DEL MÓDULO</span>
+          <span class="contador" id="contadorRespondidas">Respondidas: 0 de 10</span>
+        </div>
+        <div class="barra">
+          <span id="barraModulo"></span>
+        </div>
+      </div>
+
+      <hr class="divisor">
+
+      <div class="preguntas" id="preguntas"></div>
+
+    </section>
+
+  </main>
+
+  <footer class="pie">
+    <span>kernel_ova</span>
+    <span class="pie__punto"></span>
+    <span>OVA grupal &middot; <span id="anio"></span></span>
+  </footer>
+
+  <section class="lector" id="lector" hidden role="dialog" aria-modal="true" aria-label="Lector de OVA">
+    <div class="lector__caja">
+      <div class="lector__barra">
+        <div class="lector__info">
+          <span class="etiqueta-mono dim" data-i18n="readerLabel">OVA :: LECTURA</span>
+          <h2 id="lectorTitulo"></h2>
+        </div>
+        <button class="boton-cerrar" type="button" id="lectorCerrar">
+          <span data-i18n="closeLabel">Cerrar</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <iframe id="lectorFrame" class="lector__frame" title="Objeto Virtual de Aprendizaje" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <section class="modal-sistema" id="bienvenida" hidden role="dialog" aria-modal="true" aria-labelledby="bienvenidaTitulo">
+    <div class="modal-sistema__caja modal-sistema__caja--bienvenida">
+      <div class="modal-sistema__barra">
+        <span class="modal-sistema__punto"></span>
+        <span class="modal-sistema__nombre">boot_ova_core</span>
+        <span class="modal-sistema__prompt">OVA · CORE</span>
+      </div>
+
+      <div class="modal-sistema__cuerpo">
+        <div class="bienvenida__marca">
+          <span class="bienvenida__icono" aria-hidden="true">US</span>
+          <div>
+            <span class="etiqueta-mono cian">BOOT_SEQUENCE :: 001</span>
+            <h2 id="bienvenidaTitulo" data-i18n="bienvenidaTitulo">Inicializando tu espacio de aprendizaje</h2>
+            <p data-i18n="bienvenidaInstitucion">Ingeniería de Sistemas · Universidad Simón Bolívar</p>
+          </div>
+        </div>
+
+        <p class="bienvenida__descripcion" data-i18n="bienvenidaDescripcion">boot_ova_core preparó un recorrido con 3 Cortes, OVAs interactivos, talleres/juegos y evaluación final. Ingresa tu nombre para personalizar la sesión.</p>
+
+        <ul class="bienvenida__lista">
+          <li><span>01</span><span data-i18n="bienvenidaCortes">3 Cortes con rutas y cuestionarios</span></li>
+          <li><span>02</span><span data-i18n="bienvenidaOvas">OVAs interactivos por tema</span></li>
+          <li><span>03</span><span data-i18n="bienvenidaTalleres">Talleres y juegos integrados</span></li>
+          <li><span>04</span><span data-i18n="bienvenidaEvaluacion">Evaluación y progreso global</span></li>
+        </ul>
+
+        <form class="bienvenida__formulario" id="bienvenidaForm">
+          <label for="estudianteInput" data-i18n="nombreEstudiante">Nombre del estudiante</label>
+          <input type="text" id="estudianteInput" name="estudiante" autocomplete="name" maxlength="80" placeholder="Escribe tu nombre completo" required>
+          <div class="bienvenida__acciones">
+            <button class="boton-primario" type="submit" id="bienvenidaGuardar" data-i18n="iniciarSesion">Iniciar sesión</button>
+            <button class="boton-secundario" type="button" id="invitadoBoton" data-i18n="explorarInvitado">Explorar como invitado</button>
+          </div>
+        </form>
+
+        <p class="modal-sistema__nota">LOCAL SESSION :: <span data-i18n="estudianteLabel">ESTUDIANTE</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="modal-sistema" id="resumen" hidden role="dialog" aria-modal="true" aria-labelledby="resumenTitulo">
+    <div class="modal-sistema__caja modal-sistema__caja--resumen">
+      <div class="modal-sistema__barra">
+        <span class="modal-sistema__punto"></span>
+        <span class="modal-sistema__nombre">kernel_report</span>
+        <button class="modal-sistema__cerrar" type="button" id="resumenCerrar">
+          <span data-i18n="closeLabel">Cerrar</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+
+      <div class="modal-sistema__cuerpo">
+        <span class="etiqueta-mono cian" data-i18n="resumenSubtitulo">kernel_report // desempeño por corte</span>
+        <h2 id="resumenTitulo" data-i18n="resumenTitulo">Resumen global</h2>
+
+        <div class="resumen__global">
+          <div class="resumen__global-cabecera">
+            <span class="etiqueta-mono dim" data-i18n="rendimientoGlobal">RENDIMIENTO GLOBAL</span>
+            <strong id="resumenPct">0%</strong>
+          </div>
+          <div class="barra"><span id="resumenBarra"></span></div>
+          <p id="resumenDetalle"></p>
+        </div>
+
+        <div class="resumen__cortes" id="resumenCortes"></div>
+
+        <div class="resumen__acciones">
+          <button class="boton-peligro" type="button" id="reiniciarProgreso" data-i18n="reiniciarProgreso">Reiniciar progreso</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
