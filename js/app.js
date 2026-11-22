@@ -768,7 +768,7 @@ const cortes = [
       {
         titulo: { es: "Plataforma de evaluación", en: "Assessment platform" },
         etiqueta: { es: "Plataforma", en: "Platform" },
-        ruta: `${plataformaCorte03}/index.html`
+        ruta: `${plataformaCorte03}/index.html?v=0.4`
       },
       {
         titulo: { es: "Memoria virtual", en: "Virtual memory" },
@@ -1218,6 +1218,11 @@ function prepararFrame() {
 
   if (!doc || !win) return;
 
+  // La plataforma señalada como acceso libre gestiona su sesión de Invitado.
+  // Evitar el autoenvío del formulario antiguo, que exige un semestre y deja
+  // al estudiante bloqueado en la pantalla de registro.
+  if (doc.querySelector('meta[name="ova-access-mode"][content="guest"]')) return;
+
   const campos = [
     doc.getElementById("studentName"),
     doc.getElementById("name"),
@@ -1580,24 +1585,30 @@ function renderRuta() {
   });
 }
 
-function seleccionarUnidad(indice) {
-  // Seleccionar un corte siempre devuelve el aula a su inicio. No debe abrir
-  // el primer recurso ni desplazar al estudiante directamente al cuestionario.
-  if (indice === unidadActiva) {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    return;
+function volverAlInicioDelCorte() {
+  // La OVA puede estar abierta dentro de un iframe/modal. Desplazar el
+  // encabezado del dashboard reinicia el contenedor de lectura correcto.
+  const destino = document.querySelector(".dashboard") || document.getElementById("badgePaso");
+  if (destino && typeof destino.scrollIntoView === "function") {
+    destino.scrollIntoView({ behavior: "auto", block: "start" });
   }
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+}
 
-  unidadActiva = indice;
-  guardarAlmacen(CLAVE_UNIDAD, unidadActiva);
-
-  renderRuta();
-  renderUnidad();
-  renderPreguntas();
-  actualizarProgreso();
-
-  // El nuevo corte debe mostrarse desde su encabezado y descripción.
-  requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: "smooth" }));
+function seleccionarUnidad(indice) {
+  // Cambiar o volver a pulsar el corte activo debe mostrar su encabezado,
+  // nunca dejar al estudiante en el bloque de preguntas.
+  if (indice !== unidadActiva) {
+    unidadActiva = indice;
+    guardarAlmacen(CLAVE_UNIDAD, unidadActiva);
+    renderRuta();
+    renderUnidad();
+    renderPreguntas();
+    actualizarProgreso();
+  }
+  requestAnimationFrame(volverAlInicioDelCorte);
 }
 
 function aplicarIdioma(nuevoIdioma) {
