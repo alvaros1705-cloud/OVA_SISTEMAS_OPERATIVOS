@@ -1,0 +1,33 @@
+name: Build OVA SCORM 1.2 package
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "dist/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  build-scorm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout OVA source
+        uses: actions/checkout@v4
+
+      - name: Validate Python builder
+        run: python3 -m py_compile scripts/build_scorm.py
+
+      - name: Build SCORM 1.2 ZIP
+        run: python3 scripts/build_scorm.py
+
+      - name: Upload Moodle-ready package
+        uses: actions/upload-artifact@v4
+        with:
+          name: OVA-Sistemas-Operativos-SCORM-1.2
+          path: dist/OVA-Sistemas-Operativos-SCORM-1.2.zip
+          if-no-files-found: error
+          retention-days: 30
