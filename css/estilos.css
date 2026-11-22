@@ -1687,3 +1687,171 @@ html[data-theme="light"] .estudiante{background:#f3faf5;border-color:#cfe1d4;col
 
 /* v0.4: leave room for the sticky OVA CORE header when resetting unit scroll. */
 .dashboard { scroll-margin-top: 112px; }
+
+
+/* v0.6 — tema claro completo: superficies, títulos y cuestionarios con contraste real. */
+html[data-theme="light"] {
+  color-scheme: light;
+  --canvas: #f3f7f4;
+  --canvas-2: #eaf2ec;
+  --surface: #ffffff;
+  --surface-2: #f8fbf9;
+  --surface-3: #eef5f0;
+  --terminal-bg: #f2f8f3;
+  --border: #d6e4da;
+  --border-cian: rgba(9, 132, 59, .24);
+  --cian-bg: rgba(8, 123, 150, .08);
+  --cian-borde: #0b8795;
+  --cian-texto: #087b96;
+  --cian-brillante: #087f91;
+  --texto: #193b28;
+  --texto-suave: #405b49;
+  --texto-dim: #667c6d;
+  --verde: #09843b;
+  --glow: 0 0 14px rgba(9, 132, 59, .16);
+}
+
+html[data-theme="light"] body {
+  background: var(--canvas);
+  color: var(--texto);
+}
+
+html[data-theme="light"] .panel {
+  background: var(--surface);
+  border-color: var(--border);
+  box-shadow: 0 12px 34px rgba(23, 64, 37, .07);
+}
+
+html[data-theme="light"] .marca__icono-inner {
+  background: #f0f8f2;
+  color: #08783a;
+}
+
+html[data-theme="light"] .estudiante,
+html[data-theme="light"] .idioma,
+html[data-theme="light"] .progreso-global {
+  background: #f7fbf8;
+  border-color: var(--border);
+}
+
+html[data-theme="light"] .estudiante {
+  color: #244a31;
+}
+
+html[data-theme="light"] .estudiante__etiqueta,
+html[data-theme="light"] .progreso-global__etiqueta {
+  color: #637a69;
+}
+
+html[data-theme="light"] .estudiante__nombre,
+html[data-theme="light"] .progreso-global__pct {
+  color: #08783a;
+}
+
+html[data-theme="light"] .contenido__titulo {
+  color: #153d27;
+}
+
+html[data-theme="light"] .contenido__desc {
+  color: #405b49;
+}
+
+html[data-theme="light"] .pregunta {
+  background: #ffffff;
+  border-color: #d7e5db;
+  box-shadow: 0 5px 18px rgba(23, 64, 37, .045);
+}
+
+html[data-theme="light"] .pregunta__pestana {
+  background: #f3faf5;
+  border-color: #cfe3d4;
+  color: #08783b;
+}
+
+html[data-theme="light"] .pregunta__texto {
+  color: #1b3525;
+}
+
+html[data-theme="light"] .opcion {
+  background: #f8fbf8;
+  border-color: #d4e3d8;
+  color: #344f3d;
+}
+
+html[data-theme="light"] .opcion__texto {
+  color: #344f3d;
+}
+
+html[data-theme="light"] .opcion__marca {
+  border-color: #718878;
+}
+
+html[data-theme="light"] .opcion:hover {
+  background: #edf7f0;
+  border-color: #94c6a3;
+}
+
+html[data-theme="light"] .opcion:has(input:checked) {
+  background: #e8f5ec;
+  border-color: #168347;
+}
+
+html[data-theme="light"] .opcion input:checked ~ .opcion__texto {
+  color: #155b2d;
+}
+
+html[data-theme="light"] .pregunta--correcta {
+  border-color: #27a453;
+}
+
+html[data-theme="light"] .pregunta--incorrecta {
+  border-color: #df6b6b;
+}
+
+html[data-theme="light"] .divisor {
+  border-color: #d7e5db;
+}
+
+html[data-theme="light"] .terminal {
+  background: #f4faf5;
+  border-color: #cce2d1;
+}
+
+html[data-theme="light"] .terminal__nombre {
+  color: #617b68;
+}
+
+html[data-theme="light"] .terminal__linea {
+  color: #08783a;
+}
+
+html[data-theme="light"] .caja-progreso,
+html[data-theme="light"] .resumen__global,
+html[data-theme="light"] .resumen__corte {
+  background: #f5faf6;
+  border-color: #d5e6d9;
+  color: #25412f;
+}
+
+html[data-theme="light"] .etiqueta-mono.dim,
+html[data-theme="light"] .dim {
+  color: #667c6d;
+}
+
+html[data-theme="light"] .pie {
+  color: #667c6d;
+}
+
+html[data-theme="light"] :focus-visible {
+  outline-color: #087f91;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .pregunta,
+  .opcion,
+  .modulo,
+  .activo,
+  .tema-control {
+    transition-duration: 180ms;
+  }
+}
