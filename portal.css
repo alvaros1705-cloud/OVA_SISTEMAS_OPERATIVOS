@@ -102,32 +102,59 @@ html[data-theme="dark"] .main-nav.open{background:#10291b}
 
 /* v0.6 — movimiento ambiental sutil para la ilustración principal del portal. */
 @keyframes os-chip-float {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(-3deg); }
-  50% { transform: translate3d(0, -10px, 0) rotate(-1.7deg); }
+  0%, 100% {
+    transform: translate3d(var(--parallax-x, 0px), var(--parallax-y, 0px), 0) rotate(-3deg);
+  }
+  50% {
+    transform: translate3d(var(--parallax-x, 0px), calc(var(--parallax-y, 0px) - 16px), 0) rotate(-1deg);
+  }
 }
 @keyframes os-note-float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-7px); }
+  50% { transform: translateY(-10px); }
 }
 @keyframes os-orbit-breathe {
-  0%, 100% { transform: scale(1); opacity: .72; }
-  50% { transform: scale(1.045); opacity: 1; }
+  0%, 100% { transform: scale(.985); opacity: .62; }
+  50% { transform: scale(1.055); opacity: 1; }
 }
 @keyframes os-online-pulse {
   0%, 100% { box-shadow: 0 0 0 4px rgba(57,217,138,.13), 0 0 0 0 rgba(57,217,138,0); }
-  50% { box-shadow: 0 0 0 4px rgba(57,217,138,.16), 0 0 0 8px rgba(57,217,138,.08); }
+  50% { box-shadow: 0 0 0 4px rgba(57,217,138,.19), 0 0 0 9px rgba(57,217,138,.12); }
 }
+
+/* JavaScript agrega .motion-active cuando el movimiento está permitido. */
 .hero-visual .chip-card {
-  animation: os-chip-float 7.5s ease-in-out infinite;
+  --parallax-x: 0px;
+  --parallax-y: 0px;
   transform-origin: 50% 52%;
+}
+.hero-visual.motion-active .chip-card {
+  animation: os-chip-float 5.2s ease-in-out infinite;
   will-change: transform;
 }
-.hero-visual .orbit-one { animation: os-orbit-breathe 8s ease-in-out infinite; }
-.hero-visual .orbit-two { animation: os-orbit-breathe 8s ease-in-out -4s infinite; }
-.hero-visual .note-a { animation: os-note-float 5.5s ease-in-out infinite; }
-.hero-visual .note-b { animation: os-note-float 6.5s ease-in-out -2.5s infinite; }
-.hero-visual .chip-live i { animation: os-online-pulse 2.4s ease-in-out infinite; }
+.hero-visual.motion-active .orbit-one {
+  animation: os-orbit-breathe 7.2s ease-in-out infinite;
+}
+.hero-visual.motion-active .orbit-two {
+  animation: os-orbit-breathe 7.2s ease-in-out -3.6s infinite;
+}
+.hero-visual.motion-active .note-a {
+  animation: os-note-float 4.4s ease-in-out infinite;
+}
+.hero-visual.motion-active .note-b {
+  animation: os-note-float 5.2s ease-in-out -2.6s infinite;
+}
+.hero-visual.motion-active .chip-live i {
+  animation: os-online-pulse 2.1s ease-in-out infinite;
+}
+.hero-visual.motion-paused * {
+  animation-play-state: paused !important;
+}
 .social-placeholder {
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  pointer-events: auto;
   border-radius: 8px;
   transition: color .18s ease, opacity .18s ease, transform .18s ease, background .18s ease;
 }
@@ -141,6 +168,28 @@ html[data-theme="dark"] .main-nav.open{background:#10291b}
   outline: 2px solid var(--green);
   outline-offset: 3px;
 }
+.main-nav .social-links {
+  flex: none;
+  align-items: center;
+}
+.main-nav .social-placeholder {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: #6d786f;
+}
+.main-nav .social-placeholder:hover,
+.main-nav .social-placeholder:focus-visible {
+  color: var(--green);
+}
+@media (max-width: 900px) {
+  .main-nav .social-links {
+    margin: 8px 0 0;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+  }
+}
 @media (prefers-reduced-motion: reduce) {
   .hero-visual .chip-card,
   .hero-visual .orbit-one,
@@ -151,4 +200,8 @@ html[data-theme="dark"] .main-nav.open{background:#10291b}
     animation: none !important;
     will-change: auto;
   }
+  .social-placeholder {
+    transition: none !important;
+  }
+}
 }
