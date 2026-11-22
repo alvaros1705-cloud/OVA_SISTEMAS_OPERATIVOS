@@ -105,3 +105,9 @@ themeBtn.addEventListener('click',()=>{
  localStorage.setItem('unisimon_theme',dark?'dark':'light');applyTheme();
 });
 applyTheme();
+
+// Acceso directo para la integración del OVA: la plataforma abre como invitado
+// y no exige nombre ni semestre para consultar los temas y actividades.
+student = { name: 'Invitado', semester: 'Acceso libre' };
+renderHome();
+show('home');
