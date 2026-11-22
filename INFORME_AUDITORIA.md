@@ -129,3 +129,12 @@ Estas comprobaciones no sustituyen una prueba manual de navegación, interacció
 - Versiones de caché de la portada: `portal.css?v=0.9` y `portal.js?v=0.8`.
 - Validación estática: los cuatro enlaces sociales de portada/aula tienen `target="_blank"`; el traductor no reescribe enlaces externos; JavaScript válido; CSS balanceado.
 - La apertura en una pestaña separada está configurada en los atributos HTML. No se realizó una prueba de clic en navegador por la indisponibilidad del navegador automatizado.
+
+
+## Restauración de idioma y animación de portada v0.9 (22/11/2026)
+
+- Se corrigió un error de JavaScript en `applyLanguage()`: el selector de enlaces internos usaba `$()` (un único elemento) con `.forEach()`; ahora usa `$$()` (colección de elementos), por lo que no se interrumpe la inicialización del portal.
+- La corrección restablece el flujo de traducción ES/EN y permite que la ejecución llegue a `initHeroMotion()`, que activa la clase `motion-active` de la ilustración del procesador. Se conserva el parallax con puntero y la pausa por pestaña oculta o preferencia de movimiento reducido.
+- Se actualizó la referencia de caché del JavaScript principal a `portal.js?v=0.9`; la hoja visual se mantiene en `portal.css?v=0.9`.
+- Validación estática: JavaScript parsea sin errores; el selector interno usa `$$()`; existen los manejadores de idioma y la inicialización del movimiento; CSS balanceado; los enlaces sociales se mantienen en `target="_blank"`.
+- No se realizó validación visual interactiva de la publicación por indisponibilidad del navegador automatizado.
