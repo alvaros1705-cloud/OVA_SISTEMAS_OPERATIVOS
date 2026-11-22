@@ -1684,3 +1684,6 @@ html[data-theme="light"] .badge-estado{color:#8a5a00;background:#fff5dc;border-c
 html[data-theme="light"] .estudiante{background:#f3faf5;border-color:#cfe1d4;color:#205336}
 @media(max-width:1100px){.tema-control{padding:7px 9px}.tema-control span:last-child{display:none}}
 @media(max-width:700px){.tema-control{width:34px;height:34px;justify-content:center;padding:0}.tema-control span:last-child{display:none}.tema-control__icono{font-size:16px}}
+
+/* v0.4: leave room for the sticky OVA CORE header when resetting unit scroll. */
+.dashboard { scroll-margin-top: 112px; }
